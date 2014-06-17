@@ -6,6 +6,19 @@
 // Global values
 // --------------------------------------------------
 
+// NPR Colors
+// -------------------------
+
+@inline-link:        #4774cc;
+@primary-control:    #6d8ac4;
+@secondary-control:  #bccae5;
+@heavy-gray:         #e0e0e0;
+@light-gray:         #ebebeb;
+@branding-gray:      #7c7c7c;
+@text-gray:          #111;
+@dark-hover:         #4065a2;
+@deep-blue:          #7598C9;
+
 // Grays
 // -------------------------
 
@@ -18,7 +31,7 @@
 // Brand colors
 // -------------------------
 
-@brand-primary:         #428bca;
+@brand-primary:         @primary-control;
 @brand-success:         #5cb85c;
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
@@ -28,23 +41,23 @@
 // -------------------------
 
 @body-bg:               #fff;
-@text-color:            @gray-dark;
+@text-color:            @text-gray;
 
 // Links
 // -------------------------
 
-@link-color:            @brand-primary;
+@link-color:            @inline-link;
 @link-hover-color:      darken(@link-color, 15%);
 
 // Typography
 // -------------------------
 
-@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-sans-serif:  "Gotham SSm", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
 @font-family-base:        @font-family-sans-serif;
 
-@font-size-base:          14px;
+@font-size-base:          18px;
 @font-size-large:         ceil(@font-size-base * 1.25); // ~18px
 @font-size-small:         ceil(@font-size-base * 0.85); // ~12px
 

@@ -31,6 +31,7 @@
     <a class="sr-only" href="#content">Skip To Content</a>
 
     {% block outer_content %}
+    {#
     <nav role="navigation">
         <ul class="site-links">
             <li class="npr"><a href="http://npr.org"><img src="http://media.npr.org/chrome/news/nprlogo_138x46.gif" alt="NPR" /></a></li>
@@ -49,22 +50,20 @@
             <li class="shop"><a href="http://shop.npr.org">Shop</a></li>
         </ul>
     </nav>
-
+    #}
     {% block header_content %}
     {% endblock header_content %}
 
     <section id="content">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div id="main-content" class="col-md-8">
+                <div class="main-content" >
                     {% block content %}
                     <h1>{{ project_name }}</h1>
-                    App content goes here.
-
                     <i class="icon icon-play"></i>
                     {% endblock content %}
                 </div>
-                <div id="bigbox" class="col-md-4">
+                <div id="bigbox">
                     {# 300x250 ad #}
                     <div class="adwrapper">
                         <div id="ad-desktop" class="sponsor300">
