@@ -14,5 +14,15 @@
 {% endblock %}
 
 {% block wide_content %}
-{% include '_bill.html' %}
+{% for annotation in COPY.annotations %}
+    <div class="annotation" id="annotation-{{ annotation.slug }}">
+        <div class="cited">
+            <a href="#bill-{{ annotation.slug }}">{{ annotation.cited }}</a>
+        </div>
+        <span class="name">{{ annotation.name }}</span>
+        <span class="content">{{ annotation.content }}</span>
+    </div>
+{% endfor %}
+
+<div class="bill">{% include '_bill.html' %}</div>
 {% endblock %}
