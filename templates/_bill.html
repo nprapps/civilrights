@@ -1,5 +1,5 @@
-{% macro excerpt(slug, name) %}
-    <a href="#annotation-{{ slug }}" id="bill-{{ slug }}">{{ name }}</a>
+{% macro excerpt(slug) %}
+    <a href="#annotation-{{ slug }}" id="bill-{{ slug }}">{{ COPY.annotations[slug]['name'] }}</a>
 {% endmacro %}
 
 <h1>
@@ -160,7 +160,7 @@
 </h3>
 
 <p>
-    {{ excerpt("n-espiritu-1", "nick") }} (a)
+    {{ excerpt("n-espiritu-1") }} (a)
     All persons shall be entitled to the full and equal enjoyment of the goods, services, facilities, and privileges, advantages, and accommodations of any place of public accommodation, as defined in this section, without discrimination or segregation on the ground of race, color, religion, or national origin.
 </p>
 
@@ -218,7 +218,7 @@
 </h3>
 
 <p>
-    {{ excerpt("j-lee-1", "jen") }}No person shall (a) withhold, deny, or attempt to withhold or deny, or deprive or attempt to deprive, any person of any right or privilege secured by section 201 or 202, or (b)
+    {{ excerpt("j-lee-1") }}No person shall (a) withhold, deny, or attempt to withhold or deny, or deprive or attempt to deprive, any person of any right or privilege secured by section 201 or 202, or (b)
     intimidate, threaten, or coerce, or attempt to intimidate, threaten, or coerce any person with the purpose of interfering with any right or privilege secured by section 201 or 202, or (c) punish or attempt to punish any person for exercising or attempting to exercise any right or privilege secured by section 201 or 202.
 </p>
 

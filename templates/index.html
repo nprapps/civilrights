@@ -15,9 +15,9 @@
 
 {% block wide_content %}
 {% for annotation in COPY.annotations %}
-    <div class="annotation" id="annotation-{{ annotation.slug }}">
+    <div class="annotation" id="annotation-{{ annotation.key }}">
         <div class="cited">
-            <a href="#bill-{{ annotation.slug }}">{{ annotation.cited }}</a>
+            <a href="#bill-{{ annotation.key }}">{{ annotation.cited }}</a>
         </div>
         <span class="name">{{ annotation.name }}</span>
         <span class="content">{{ annotation.content }}</span>
