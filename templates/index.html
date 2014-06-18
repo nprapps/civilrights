@@ -13,14 +13,17 @@
 </header>
 {% endblock %}
 
-{% block wide_content %}
+{% block content %}
 {% for annotation in COPY.annotations %}
     <div class="annotation" id="annotation-{{ annotation.key }}">
-        <div class="cited">
-            <a href="#bill-{{ annotation.key }}">{{ annotation.cited }}</a>
+        <div class="annotator">
+            <img class="mug" src="http://placekitten.com/g/300/300">
+            <p class="name">{{ annotation.name }}</p>
         </div>
-        <span class="name">{{ annotation.name }}</span>
-        <span class="content">{{ annotation.content }}</span>
+        <div class="cited">
+            <p><a href="#bill-{{ annotation.key }}">{{ annotation.cited }}</a></p>
+        </div>
+        <p class="content">{{ annotation.content }}</p>
     </div>
 {% endfor %}
 
