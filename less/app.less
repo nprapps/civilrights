@@ -27,7 +27,7 @@ body {
 header {
 	background-color: @light-gray;
 	padding: 50px 0 30px;
-	margin: 0;
+	margin: 0 0 @line-height-computed * 2;
 	border-bottom: 2px solid #fff;
 
 	.project-header {
@@ -139,12 +139,55 @@ header {
 	}
 
 	.bill {
-		.make-sm-column(10);
-		.make-sm-column-offset(1);
+		.make-sm-column(12);
+
+		.fulltext-wrapper {
+			.make-row();
+
+			.chapter-nav {
+				.make-sm-column(10);
+				.make-sm-column-offset(1);
+				.make-md-column(3);
+				.make-md-column-offset(0);
+			}
+
+			.fulltext {
+				.make-sm-column(10);
+				.make-sm-column-offset(1);
+				.make-md-column(8);
+				.make-md-column-offset(0);
+			}
+		}
 
 
 		.excerpt {
 
+		}
+
+		.chapter-nav {
+			margin-top: @line-height-computed;
+
+			ul {
+				.list-unstyled;
+
+				&.affix {
+					top: 11px;
+   					width: 25%;
+   					max-width: 300px;
+   					padding: 0 @grid-gutter-width / 2;
+   					margin-left: -@grid-gutter-width / 2;
+
+   					@media screen and (max-width: @screen-sm-max){
+   						position: static;
+   						width: auto;
+   					}
+				}
+
+   				@media screen and (min-width:@screen-md){
+   					font-size: @font-size-small;
+   				}
+
+			}
 		}
 
 		h3 {
