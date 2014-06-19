@@ -225,11 +225,16 @@ header {
    					&.affix-bottom {
    						bottom: 115px;
    					}
+				}
 
-   					@media screen and (max-width: @screen-sm-max){
-   						position: static !important;
-   						width: auto;
-   					}
+				@media screen and (max-width: @screen-sm-max){
+					&.affix,
+					&.affix-top,
+					&.affix-bottom {
+						position: static !important;
+						width: auto;
+						max-width: 100%;
+					}
 				}
 
    				@media screen and (min-width:@screen-md){
