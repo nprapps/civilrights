@@ -157,11 +157,8 @@ header {
 		.fulltext-wrapper {
 			.make-row();
 
-			> h2 {
-				.make-sm-column(10);
-				.make-sm-column-offset(1);
-				.make-md-column(8);
-				.make-md-column-offset(3);
+			> h1 {
+				.make-sm-column(12);
 			}
 
 			.chapter-nav {
@@ -191,9 +188,10 @@ header {
 				.list-unstyled;
 
 				a {
-					font-family: @font-family-serif;
-					font-style: italic;
-					color: @gray-light;
+					// font-family: @font-family-serif;
+					// font-style: italic;
+					text-transform: uppercase;
+					color: @text-color;
 					padding: 2px 5px;
 				}
 
@@ -209,7 +207,7 @@ header {
 					display: block;
 					font-family: @font-family-sans-serif;
 					font-style: normal;
-					color: @gray;
+					color: @gray-light;
 				}
 
 				&.affix {
@@ -241,12 +239,49 @@ header {
 			}
 		}
 
-		h3 {
-			margin-top: @line-height-computed;
+		h2 {
+			margin-top: @line-height-computed * 3;
+			// font-size: @font-size-base;
+			// font-family: @font-family-serif;
+			// font-style: italic;
+			// color: @gray;
+			text-transform: uppercase;
 
-			// @media screen and (min-width: @screen-lg){
-			// 	font-size: floor(@font-size-base * 2.25);
-			// }
+			&:first-child {
+				margin-top: @line-height-computed;
+			}
+		}
+
+		h3 {
+			font-weight: bold;
+
+			+ h4,
+			+ h5 {
+				margin-top: 0;
+			}
+		}
+
+		h4 {
+			margin-top: @line-height-computed * 2;
+
+			+ h5 {
+				margin-top: 0;
+			}
+		}
+
+		h5 {
+			color: @gray-light;
+
+			margin-top: @line-height-computed * 2;
+		}
+
+		h2,
+		h3,
+		h4,
+		h5 {
+			+ p {
+				margin-top: @line-height-computed;
+			}
 		}
 
 		p {
