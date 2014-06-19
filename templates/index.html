@@ -26,6 +26,7 @@
     {% for annotation in COPY.annotations %}
         {% set contributor = COPY.contributors[annotation.author_slug] %}
         <div class="annotation" id="annotation-{{ annotation.key }}">
+            <span class="rule"></span>
             <div class="annotator">
                 <img class="mug" src="{{ contributor.mug }}">
                 <p class="name">{{ contributor.name }}</p>
