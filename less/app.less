@@ -75,18 +75,16 @@ header {
 		left: 0;
 		right: 0;
 		z-index: 10;
+		width: 100%;
+
+		> li {
+			display: table-cell;
+			width: 1%;
+		}
 	}
 
 	> .tab-content {
 		.make-row();
-
-		.tab-pane {
-			display: none;
-
-			&.show {
-				display: block;
-			}
-		}
 
 		> .annotations {
 			.make-sm-column(10);
@@ -151,6 +149,13 @@ header {
 
 		.fulltext-wrapper {
 			.make-row();
+
+			> h2 {
+				.make-sm-column(10);
+				.make-sm-column-offset(1);
+				.make-md-column(8);
+				.make-md-column-offset(3);
+			}
 
 			.chapter-nav {
 				.make-sm-column(10);
