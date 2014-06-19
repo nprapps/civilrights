@@ -15,14 +15,14 @@
 
 {% block content %}
 <div class="row">
-    <ul class="nav nav-pills nav-justified">
-      <li class="active"><a href="#annotations" data-toggle="tab">Annotations</a></li>
-      <li><a href="#bill" data-toggle="tab">Full Text</a></li>
+    <ul class="mode-toggle nav nav-pills nav-justified">
+      <li class="active"><a href="#annotations">Annotations</a></li>
+      <li><a href="#bill">Full Text</a></li>
     </ul>
 </div>
 
 <div class="tab-content">
-  <div class="tab-pane active annotations" id="annotations">
+  <div class="tab-pane show annotations" id="annotations">
     {% for annotation in COPY.annotations %}
         <div class="annotation" id="annotation-{{ annotation.key }}">
             <div class="annotator">
