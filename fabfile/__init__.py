@@ -7,10 +7,10 @@ import app_config
 
 # Other fabfiles
 import assets
-import copytext
 import data
 import issues
 import render
+import text
 import utils
 
 if app_config.DEPLOY_TO_SERVERS:
@@ -135,7 +135,7 @@ def update():
     """
     Update all application data not in repository (copy, assets, etc).
     """
-    copytext.update()
+    text.update()
     assets.sync()
     data.update()
 
@@ -154,7 +154,7 @@ def deploy(remote='origin'):
 
         servers.checkout_latest(remote)
 
-        servers.fabcast('copytext.update')
+        servers.fabcast('text.update')
         servers.fabcast('assets.sync')
         servers.fabcast('data.update')
 
