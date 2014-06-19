@@ -27,7 +27,7 @@
         <div class="annotation" id="annotation-{{ annotation.key }}">
             <div class="annotator">
                 <img class="mug" src="http://placekitten.com/g/300/300">
-                <p class="name">{{ annotation.name }}</p>
+                <p class="name">{{ COPY.contributors[annotation.author_slug].name }}</p>
             </div>
             <div class="cited">
                 <p><a href="#bill-{{ annotation.key }}">{{ annotation.cited }}</a></p>
