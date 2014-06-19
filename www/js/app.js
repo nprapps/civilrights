@@ -1,19 +1,28 @@
 var $chapterLinks = null;
 var $billLinks = null;
+var $annotationLinks = null;
 
-var onChapterClick = function() {
+var onChapterClick = function(e) {
+	e.preventDefault();
+
 	var target = $(this).attr('href');
 	$.scrollTo($(target), { duration: 350 });
-
-	return false;
 }
 
-var onBillLinkClick = function() {
+var onBillLinkClick = function(e) {
+	e.preventDefault();
+
 	var target = $(this).attr('href');
 	$('#tab-nav a[href="#bill"]').tab('show');
 	$.scrollTo($(target), { duration: 350 });
+}
 
-	return false;
+var onAnnotationLinkClick = function(e) {
+	e.preventDefault();
+
+	var target = $(this).attr('href');
+	$('#tab-nav a[href="#annotations"]').tab('show');
+	$.scrollTo($(target), { duration: 350 });
 }
 
 var setupChapterAffix = function() {
@@ -22,9 +31,6 @@ var setupChapterAffix = function() {
 			offset: {
 				top: function () {
 					return (this.top = $('.chapter-nav').offset().top + 11)
-				},
-				bottom: function () {
-					return (this.bottom = $(document).height() - $('footer').offset().top + 11)
 				}
 			}
 		})
@@ -34,13 +40,11 @@ var setupChapterAffix = function() {
 $(function() {
 	$chapterLinks = $('.chapter-nav a');
 	$billLinks = $('.bill-link');
-	$modeToggleButtons = $('.mode-toggle a');
-	$tabPanes = $('.tab-pane');
+	$annotationLinks = $('.annotation-link');
 
 	$chapterLinks.on('click', onChapterClick);
 	$billLinks.on('click', onBillLinkClick);
+	$annotationLinks.on('click', onAnnotationLinkClick);
 
 	setupChapterAffix();
-	$('body').scrollspy({ target: '.chapter-nav' })
-
 });
