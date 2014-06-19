@@ -1,8 +1,19 @@
 var $chapterLinks = null;
+var $billLinks = null;
 
 var onChapterClick = function() {
 	var target = $(this).attr('href');
 	$.scrollTo($(target), { duration: 350 });
+
+	return false;
+}
+
+var onBillLinkClick = function() {
+	var target = $(this).attr('href');
+	$('#tab-nav a[href="#bill"]').tab('show');
+	$.scrollTo($(target), { duration: 350 });
+
+	return false;
 }
 
 var setupChapterAffix = function() {
@@ -19,8 +30,10 @@ var setupChapterAffix = function() {
 
 $(function() {
 	$chapterLinks = $('.chapter-nav a');
+	$billLinks = $('.bill-link');
 
 	$chapterLinks.on('click', onChapterClick);
+	$billLinks.on('click', onBillLinkClick);
 
 	setupChapterAffix();
 });

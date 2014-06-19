@@ -1,5 +1,7 @@
 {% macro excerpt(slug) %}
-    <a href="#annotation-{{ slug }}" id="bill-{{ slug }}">{{ COPY.annotations[slug]['name'] }}</a>
+    {% set annotation = COPY.annotations[slug] %}
+    {% set contributor = COPY.contributors[annotation.author_slug] %}
+    <a href="#annotation-{{ slug }}" id="bill-{{ slug }}">{{ contributor.name }}</a>
 {% endmacro %}
 
 <h2>

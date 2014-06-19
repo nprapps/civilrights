@@ -1,4 +1,3 @@
-var EVENT_CATEGORY = ;
 var $comments = null;
 var $commentButton = null;
 var $commentCount = null;
