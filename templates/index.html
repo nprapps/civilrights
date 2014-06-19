@@ -24,6 +24,10 @@
 <div class="tab-content">
   <div class="tab-pane active annotations" id="annotations">
     {% for annotation in COPY.annotations %}
+        {% if annotation.title != last_title %}
+            <h2>{{ annotation.title }}</h2>   
+            {% set last_title = annotation.title %}
+        {% endif %}
         {% set contributor = COPY.contributors[annotation.author_slug] %}
         <div class="annotation" id="annotation-{{ annotation.key }}">
             <span class="rule"></span>
