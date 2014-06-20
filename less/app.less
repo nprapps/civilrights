@@ -28,15 +28,21 @@ header {
 	background-color: @light-gray;
 	padding: 50px 0 30px;
 	margin: 0;
-	border-bottom: 2px solid #fff;
+	color: #000;
 
 	.project-header {
 		.make-sm-column(10);
 		.make-sm-column-push(1);
 	}
 
+	h1 {
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+
 	h2 {
 	    font-size: @font-size-base;
+	    color: @gray;
 	}
 }
 
@@ -166,18 +172,21 @@ header {
 	}
 
 	.bill {
+		padding-top: @line-height-computed * 2;
+
 		.fulltext-wrapper {
 			.make-row();
 
 			> h1 {
-				.make-sm-column(12);
+				.make-sm-column(10);
+				.make-sm-column-offset(1);
 			}
 
 			.chapter-nav {
 				.make-sm-column(10);
 				.make-sm-column-offset(1);
 				.make-md-column(3);
-				.make-md-column-offset(0);
+				.make-md-column-push(8);
 			}
 
 			.fulltext {
@@ -185,6 +194,7 @@ header {
 				.make-sm-column-offset(1);
 				.make-md-column(8);
 				.make-md-column-offset(0);
+				.make-md-column-pull(3);
 			}
 		}
 
