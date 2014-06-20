@@ -31,7 +31,10 @@ var setupChapterAffix = function() {
 			offset: {
 				top: function () {
 					return (this.top = $('.chapter-nav').offset().top + 11)
-				}
+				},
+ 				bottom: function () {
+ 					return (this.bottom = $(document).height() - $('footer').offset().top + 11)
+  				}
 			}
 		})
 	}
@@ -47,4 +50,5 @@ $(function() {
 	$annotationLinks.on('click', onAnnotationLinkClick);
 
 	setupChapterAffix();
+	$('body').scrollspy({ target: '.chapter-nav' })
 });
