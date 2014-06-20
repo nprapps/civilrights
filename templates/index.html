@@ -14,31 +14,36 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    <ul id="tab-nav" class="mode-toggle nav nav-pills nav-justified">
-      <li class="active"><a href="#annotations" data-toggle="tab">Annotations</a></li>
-      <li><a href="#bill" data-toggle="tab">Full Text</a></li>
-    </ul>
-</div>
+<ul id="tab-nav" class="mode-toggle nav nav-pills nav-justified">
+    <li class="active"><a href="#annotations" data-toggle="tab">Annotations</a></li>
+    <li><a href="#bill" data-toggle="tab">Full Text</a></li>
+</ul>
 
 <div class="tab-content">
-  <div class="tab-pane active annotations" id="annotations">
+    <div class="tab-pane active annotations" id="annotations">
     {% for annotation in COPY.annotations %}
         {% if annotation.title != last_title %}
-            <h2>{{ annotation.title }}</h2>   
-            {% set last_title = annotation.title %}
+        <div class="section-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <h2>{{ annotation.title }}</h2>
+                    {% set last_title = annotation.title %}
+                </div>
+            </div>
+        </div>
         {% endif %}
         {% set contributor = COPY.contributors[annotation.author_slug] %}
-        <div class="annotation" id="annotation-{{ annotation.key }}">
-            <span class="rule"></span>
-            <div class="annotator">
-                <img class="mug" src="{{ contributor.mug }}">
-                <p class="name">{{ contributor.name }}</p>
+        <div class="annotation container-fluid" id="annotation-{{ annotation.key }}">
+            <div class="row">
+                <div class="annotator">
+                    <img class="mug" src="{{ contributor.mug }}">
+                    <p class="name">{{ contributor.name }}</p>
+                </div>
+                <div class="cited">
+                    <p><a class="bill-link" href="#bill-{{ annotation.key }}">{{ annotation.cited }}</a></p>
+                </div>
+                <p class="content">{{ annotation.content }}</p>
             </div>
-            <div class="cited">
-                <p><a class="bill-link" href="#bill-{{ annotation.key }}">{{ annotation.cited }}</a></p>
-            </div>
-            <p class="content">{{ annotation.content }}</p>
         </div>
     {% endfor %}
     </div>
