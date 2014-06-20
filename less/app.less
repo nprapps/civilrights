@@ -94,11 +94,18 @@ header {
 		background-position: 50% 50%;
 		padding-bottom: 56.25%; // 16:9
 
+
+		.container-fluid {
+			position: absolute;
+			bottom: @line-height-computed;
+			left: 0;
+			right: 0;
+		}
+
 		h2 {
 			.make-sm-column(11);
 			.make-sm-column-offset(1);
-			position: absolute;
-			bottom: @line-height-computed;
+
 			text-transform: uppercase;
 			color: #fff;
 			text-shadow: rgba(0,0,0,0.3) 0 0 5px;
