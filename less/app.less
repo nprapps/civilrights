@@ -72,6 +72,40 @@ header {
 
 // Content
 .main-content {
+	.contributor-wrapper {
+		.make-sm-column(10);
+		.make-sm-column-offset(1);
+
+		padding-top: @line-height-computed * 2;
+		padding-bottom: @line-height-computed * 2;
+	}
+	.contributor {
+		.make-sm-column(6);
+		.make-md-column(3);
+		margin-bottom: @line-height-computed;
+		overflow: hidden;
+
+		img {
+			.img-responsive;
+			.img-circle;
+
+			width: 60px;
+			float: left;
+			clear: left;
+		}
+
+		h4,p {
+			padding-left: 75px;
+		}
+
+		h4 {
+			font-size: @font-size-base;
+			font-weight: bold;
+			text-transform: uppercase;
+			padding-top: 15px;
+		}
+
+	}
 	.mode-toggle {
 		position: fixed;
 		bottom: 0;
