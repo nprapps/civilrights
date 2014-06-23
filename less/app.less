@@ -89,6 +89,7 @@ header {
 
 	.section-header {
 		position: relative;
+		background-color: #000;
 		background-image: url("/assets/03130u.jpg");
 		background-size: cover;
 		background-position: 50% 50%;
@@ -157,6 +158,21 @@ header {
 				text-align: center;
 				text-transform: uppercase;
 				font-size: @font-size-small;
+			}
+
+			@media screen and (max-width: @screen-xs-max){
+				.clearfix;
+
+				.mug {
+					max-width: 33.33333%;
+					float: left;
+					margin-right: @grid-gutter-width / 2;
+				}
+
+				.name {
+					padding-top: @line-height-computed;
+					text-align: left;
+				}
 			}
 		}
 
