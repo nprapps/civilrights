@@ -1,7 +1,8 @@
 {% macro excerpt(key) %}
     {% set annotation = COPY.annotations[key] %}
     {% set contributor = COPY.contributors[annotation.author_key] %}
-    <a class="annotation-link" href="#annotation-{{ key }}" id="bill-{{ key }}">{{ contributor.name }}</a>
+    <img class="annotation-mug" src="{{ contributor.mug }}">
+    <a class="annotation-link" href="#annotation-{{ key }}" id="bill-{{ key }}">
 {% endmacro %}
 
 <div class="container-fluid">
@@ -65,14 +66,10 @@
                 <h2 id="fulltext-an-act">
                     An Act
                 </h2>
-                <div class="annotations">
-                    <ul class="list-unstyled">
-                        <li><a href="#"><img src="http://placekitten.com/g/300/300"></a></li>
-                    </ul>
-                </div>
+
                 <p>
-                    {{ excerpt("3") }} To
-                    enforce the constitutional right to vote
+                    To
+                    {{ excerpt("3") }}enforce the constitutional right to vote</a>
                     , to confer jurisdiction upon the district courts of the United States to provide injunctive relief against discrimination in public accommodations, to authorize the Attorney General to institute suits to protect constitutional rights in public facilities and public education, to extend the Commission on Civil Rights, to prevent discrimination in federally assisted programs, to establish a Commission on Equal Employment Opportunity, and for other purposes.
                 </p>
 
@@ -85,7 +82,7 @@
                 <h5>SEC. 101.</h5>
 
                 <p>
-                    {{ excerpt("4") }} {{ excerpt("5") }} Section 2004 of the Revised Statutes (42 U.S.C. 1971), as amended by section 131 of the Civil Rights Act of 1957 (71 Stat. 637), and as further amended by section 601 of the Civil Rights Act of 1960 (74 Stat. 90), is further amended as follows:
+                    {#{{ excerpt("4") }} {{ excerpt("5") }}#} Section 2004 of the Revised Statutes (42 U.S.C. 1971), as amended by section 131 of the Civil Rights Act of 1957 (71 Stat. 637), and as further amended by section 601 of the Civil Rights Act of 1960 (74 Stat. 90), is further amended as follows:
                 </p>
 
                 <p>
@@ -93,7 +90,7 @@
                 </p>
 
                 <p>
-                    {{ excerpt("6") }} &quot;(2) No person acting under color of law shall--
+                    &quot;(2) {{ excerpt("6") }}No person acting under color of law shall</a>--
                 </p>
 
                 <p>
@@ -121,8 +118,8 @@
                 </p>
 
                 <p>
-                    {{ excerpt("7") }} (b) Insert immediately following the period at the end of the first sentence of subsection (c) the following new sentence: &quot;If in any such proceeding literacy is a relevant fact there shall be a rebuttable presumption that any person who has not been adjudged an incompetent and who has completed the sixth grade in a public school in, or a private school accredited by, any State or territory, the District of Columbia,
-                    or the Commonwealth of Puerto Rico where instruction is carried on predominantly in the English language
+                    (b) Insert immediately following the period at the end of the first sentence of subsection (c) the following new sentence: &quot;If in any such proceeding literacy is a relevant fact there shall be a rebuttable presumption that any person who has not been adjudged an incompetent and who has completed the sixth grade in a public school in, or a private school accredited by, any State or territory, the District of Columbia,
+                    {{ excerpt("7") }}or the Commonwealth of Puerto Rico where instruction is carried on predominantly in the English language</a>
                     , possesses sufficient literacy, comprehension, and intelligence to vote in any Federal election.&quot;
                 </p>
 
@@ -159,8 +156,8 @@
                 </h5>
 
                 <p>
-                    {{ excerpt("8") }} (a)
-                    All persons shall be entitled to the full and equal enjoyment of the goods, services, facilities, and privileges, advantages, and accommodations of any place of public accommodation, as defined in this section, without discrimination or segregation on the ground of race, color, religion, or national origin.
+                    (a)
+                    {{ excerpt("8") }}All persons shall be entitled to the full and equal enjoyment of the goods, services, facilities, and privileges, advantages, and accommodations of any place of public accommodation, as defined in this section, without discrimination or segregation on the ground of race, color, religion, or national origin.</a>
                 </p>
 
                 <p>
@@ -217,7 +214,7 @@
                 </h5>
 
                 <p>
-                    {{ excerpt("j-lee-1") }}No person shall (a) withhold, deny, or attempt to withhold or deny, or deprive or attempt to deprive, any person of any right or privilege secured by section 201 or 202, or (b)
+                    No person shall (a) withhold, deny, or attempt to withhold or deny, or deprive or attempt to deprive, any person of any right or privilege secured by section 201 or 202, or (b)
                     intimidate, threaten, or coerce, or attempt to intimidate, threaten, or coerce any person with the purpose of interfering with any right or privilege secured by section 201 or 202, or (c) punish or attempt to punish any person for exercising or attempting to exercise any right or privilege secured by section 201 or 202.
                 </p>
 
