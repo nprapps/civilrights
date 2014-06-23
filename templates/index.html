@@ -52,12 +52,14 @@
         {% set contributor = COPY.contributors[annotation.author_key] %}
         <div class="annotation container-fluid" id="annotation-{{ annotation.key }}">
             <div class="row">
+                {% if annotation.is_reply !="TRUE" %}
+                <div class="cited">
+                    <p><a class="bill-link" href="#bill-{{ annotation.key }}">{{ annotation.cited }}</a></p>
+                </div>
+                {% endif %}
                 <div class="annotator">
                     <img class="mug" src="{{ contributor.mug }}">
                     <p class="name">{{ contributor.name }}</p>
-                </div>
-                <div class="cited">
-                    <p><a class="bill-link" href="#bill-{{ annotation.key }}">{{ annotation.cited }}</a></p>
                 </div>
                 <p class="content">{{ annotation.content }}</p>
             </div>
