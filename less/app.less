@@ -289,6 +289,24 @@ header {
 						position: static !important;
 						width: auto;
 						max-width: 100%;
+
+						.active a {
+							color: inherit;
+							background: inherit;
+						}
+					}
+
+					border-bottom: 2px solid @light-gray;
+					padding-bottom: @line-height-computed / 2;
+					font-size: 12px;
+					.content-columns(2, @grid-gutter-width / 2);
+
+					li{
+						-webkit-column-break-inside:avoid;
+						-moz-column-break-inside:avoid;
+						-o-column-break-inside:avoid;
+						-ms-column-break-inside:avoid;
+						column-break-inside:avoid;
 					}
 				}
 
@@ -296,6 +314,12 @@ header {
    					font-size: floor(@font-size-base * 0.75);
    				}
 
+			}
+		}
+
+		h1 {
+			@media screen and (max-width: @screen-sm-max){
+				font-size: floor(@font-size-base * 2.25);
 			}
 		}
 
