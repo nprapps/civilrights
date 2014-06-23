@@ -32,7 +32,7 @@
             </div>
         </div>
         {% endif %}
-        {% set contributor = COPY.contributors[annotation.author_slug] %}
+        {% set contributor = COPY.contributors[annotation.author_key] %}
         <div class="annotation container-fluid" id="annotation-{{ annotation.key }}">
             <div class="row">
                 <div class="annotator">

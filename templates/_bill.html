@@ -1,7 +1,7 @@
-{% macro excerpt(slug) %}
-    {% set annotation = COPY.annotations[slug] %}
-    {% set contributor = COPY.contributors[annotation.author_slug] %}
-    <a class="annotation-link" href="#annotation-{{ slug }}" id="bill-{{ slug }}">{{ contributor.name }}</a>
+{% macro excerpt(key) %}
+    {% set annotation = COPY.annotations[key] %}
+    {% set contributor = COPY.contributors[annotation.author_key] %}
+    <a class="annotation-link" href="#annotation-{{ key }}" id="bill-{{ key }}">{{ contributor.name }}</a>
 {% endmacro %}
 
 <div class="container-fluid">

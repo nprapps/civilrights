@@ -41,7 +41,7 @@ def retrieve_comments(service, file_id):
     List of comments.
   """
   try:
-    comments = service.comments().list(fileId=file_id).execute()
+    comments = service.comments().list(fileId=file_id, maxResults=100).execute()
     return comments.get('items', [])
   except errors.HttpError, error:
     print 'An error occurred: %s' % error
@@ -52,13 +52,30 @@ comments = retrieve_comments(service, '1cPuHCoLshw_srl-OG7dzdk4kDr7mwPGUUgW55JRP
 
 output = []
 
+slugs = {
+  'Jennifer Lee': 'jennifer-lee',
+  'Nikole Hannah-Jones': 'nikole-hannah-jones',
+  'Clay Risen': 'clay-risen',  
+  'Nicholas Espiritu': 'nicholas-espiritu', 
+  'Samuel Bagenstos': 'samuel-bagenstos',  
+  'Anonymous':'nina-totenberg', 
+  'PHS':'phs',
+  'awheeler': 'mark-updegrove',
+}
+
+comments = sorted(comments, key=lambda c: c['anchor'])
+
 for comment in comments:
-	d = {}
-	d['name'] = comment['author']['displayName']
-	d['content'] = comment['content']
-	output.append(d)
+  d = {}
+  name = comment['author']['displayName']
+
+  d['author_key'] = slugs[name]
+  d['content'] = comment['content']
+  d['cited'] = comment['context']['value']
+  output.append(d)
+
 
 with open('comments.csv', 'w') as f:
-	writer = csv.DictWriter(f, ['name', 'content'])
+	writer = csv.DictWriter(f, ['author_key', 'content', 'cited'])
 	writer.writeheader()
 	writer.writerows(output)
