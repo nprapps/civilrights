@@ -1,7 +1,14 @@
-{% macro excerpt(key) %}
+{% macro excerpt(key, key2) %}
     {% set annotation = COPY.annotations[key] %}
     {% set contributor = COPY.contributors[annotation.author_key] %}
     <img class="annotation-mug" src="{{ contributor.mug }}">
+
+    {% if key2 %}
+        {% set annotation2 = COPY.annotations[key2] %}
+        {% set contributor2 = COPY.contributors[annotation2.author_key] %}
+        <img class="annotation-mug" src="{{ contributor2.mug }}">
+    {% endif %}
+
     <a class="annotation-link" href="#annotation-{{ key }}" id="bill-{{ key }}">
 {% endmacro %}
 
@@ -157,14 +164,14 @@
 
                 <p>
                     (a)
-                    {{ excerpt("8") }}All persons shall be entitled to the full and equal enjoyment of the goods, services, facilities, and privileges, advantages, and accommodations of any place of public accommodation, as defined in this section, without discrimination or segregation on the ground of race, color, religion, or national origin.</a>
+                    {{ excerpt("8", "9") }}All persons shall be entitled to the full and equal enjoyment of the goods, services, facilities, and privileges, advantages, and accommodations of any place of public accommodation, as defined in this section, without discrimination or segregation on the ground of race, color, religion, or national origin.</a>
                 </p>
 
                 <p>
                     (b)
-                    {{ excerpt("10") }}Each of the following establishments which serves the public is a place of public accommodation</a>
+                    {{ excerpt("10", "11") }}Each of the following establishments which serves the public is a place of public accommodation</a>
                     &nbsp;within the meaning of this title if its
-                    {{ excerpt("13") }}operations affect commerce</a>, {{ excerpt("12") }}or if discrimination or segregation by it is supported by State action</a>
+                    {{ excerpt("12", "13") }}operations affect commerce, or if discrimination or segregation by it is supported by State action</a>
                     :
                 </p>
 
@@ -194,7 +201,7 @@
 
                 <p>
                     (e) The provisions of this title shall not apply to a
-                    {{ excerpt("14") }}private club or other establishment not in fact open to the public</a>
+                    {{ excerpt("14", "15") }}private club or other establishment not in fact open to the public</a>
                     , except to the extent that the facilities of such establishment are made available to the customers or patrons of an establishment within the scope of subsection (b).
                 </p>
 
@@ -465,7 +472,7 @@
 
                 <p>
                     (2) signed by an individual, or his parent, to the effect that he has been denied admission to or not permitted to continue in attendance at a public college by reason of race, color, religion, or national origin, and the Attorney General believes the complaint is meritorious and certifies that the signer or signers of such complaint are unable, in his judgment, to initiate and maintain appropriate legal proceedings for relief and that the institution of an action will materially further the orderly achievement of desegregation in public education, the Attorney General is authorized, after giving notice of such complaint to the appropriate school board or college authority and after certifying that he is satisfied that such board or authority has had a reasonable time to adjust the conditions alleged in such complaint, to institute for or in the name of the United States a civil action in any appropriate district court of the United States against such parties and for such relief as may be appropriate, and such court shall have and shall exercise jurisdiction of proceedings instituted pursuant to this section, provided that
-                    {{ excerpt("26") }}nothing herein shall empower any official or court of the United States to issue any order seeking to achieve a racial balance in
+                    {{ excerpt("26", "27") }}nothing herein shall empower any official or court of the United States to issue any order seeking to achieve a racial balance in
                     any school by requiring the transportation of pupils
                     &nbsp;or students from one school to another or one school district to another in order to achieve such racial balance, or otherwise enlarge the existing power of the court to insure compliance with constitutional standards</a>. The Attorney General may implead as defendants such additional parties as are or become necessary to the grant of effective relief hereunder.
                 </p>
@@ -888,7 +895,7 @@
 
                 <p>
                     (f) As used in this title, the phrase &quot;unlawful employment practice&quot; shall not be deemed to include any action or measure taken by an employer, labor organization, joint labor-management committee, or employment agency with respect to an individual who is a member of the
-                    {{ excerpt("38") }}Communist Party of the United
+                    {{ excerpt("38", "39") }}Communist Party of the United
                     &nbsp;States or of any other organization required to register as a Communist-action or Communist-front organization</a>
                     &nbsp;by final order of the Subversive Activities Control Board pursuant to the Subversive Activities Control Act of 1950.
                 </p>
@@ -1073,7 +1080,7 @@
 
                 <p>
                     (k) In any action or proceeding under this title the court, in its discretion, may allow the prevailing party, other than the Commission or the United States,
-                    {{ excerpt("43") }}a
+                    {{ excerpt("43", "44") }}a
                     reasonable
                     &nbsp;attorney&#39;s fee as part of the costs</a>
                     , and the Commission and the United States shall be liable for costs the same as a private person.
@@ -1188,8 +1195,8 @@
                 </h4>
                 <h5>
                     
-                    SEC.
-                    712
+                    {{ excerpt("45")}}SEC.
+                    712</a>
                     .
                 </h5>
 
@@ -1311,7 +1318,7 @@
 
                 <p>
                     (a) There is hereby established in and as a part of the
-                    Department of Commerce a Community Relations Service
+                    {{ excerpt("46")}}Department of Commerce a Community Relations Service</a>
                     &nbsp;(hereinafter referred to as the &quot;Service&quot;), which shall be headed by a Director who shall be appointed by the President with the advice and consent of the Senate for a term of four years. The Director is authorized to appoint, subject to the civil service laws and regulations, such other personnel as may be necessary to enable the Service to carry out its functions and duties, and to fix their compensation in accordance with the Classification Act of 1949, as amended. The Director is further authorized to procure services as authorized by section 15 of the Act of August 2, 1946 (60 Stat. 810; 5 U.S.C. 55(a)), but at rates for individuals not in excess of $75 per diem.
                 </p>
 
