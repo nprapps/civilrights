@@ -179,6 +179,14 @@ header {
 
 		padding-top: @line-height-computed * 2;
 		padding-bottom: @line-height-computed * 2;
+
+		h3 {
+			.make-xs-column(12);
+
+			text-transform: uppercase;
+			font-weight: bold;
+			margin-bottom: @line-height-computed;
+		}
 	}
 	.contributor {
 		.make-sm-column(6);
@@ -192,11 +200,8 @@ header {
 
 			width: 60px;
 			float: left;
-			clear: left;
-		}
-
-		h4,p {
-			padding-left: 75px;
+			margin-right: 5px;
+			margin-bottom: @line-height-computed / 2;
 		}
 
 		h4 {
@@ -204,6 +209,11 @@ header {
 			font-weight: bold;
 			text-transform: uppercase;
 			padding-top: 15px;
+		}
+
+		p {
+			font-size: @font-size-small;
+			clear: left;
 		}
 
 	}

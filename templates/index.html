@@ -49,11 +49,15 @@
             <div class="row">
                 <div class="contributor-wrapper">
                     <div class="row">
+                        <h3>With Commentary By</h3>
                     {% for contributor in COPY.contributors %}
                         <div class="contributor">
                             <img src="{{ contributor.mug }}">
                             <h4>{{ contributor.name }}</h4>
-                            <p>{{ contributor.bio }}</p>
+                            <!-- <p>{{ contributor.bio }}</p> -->
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. </p>
+
                         </div>
                     {% endfor %}
                     </div>
