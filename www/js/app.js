@@ -1,11 +1,12 @@
 var $body = null;
 var $chapterLinks = null;
-var $billLinks = null;
-var $annotationLinks = null;
+var $documentLinks = null;
+var $toggleLinks = null;
 var $bill = null;
 var $annotations = null;
 var $fullTextButton = null;
 var mode = 'annotations';
+var previousPosition = false;
 
 var onChapterClick = function(e) {
 	e.preventDefault();
@@ -14,52 +15,75 @@ var onChapterClick = function(e) {
 	$(target).velocity("scroll", { duration: 500, offset: -60});
 }
 
-var onBillLinkClick = function(e) {
+var onDocumentLinkClick = function(e) {
 	e.preventDefault();
 
+	var $this = $(this);
+	var target = $this.attr('href');
 
-	if ($(this).hasClass('active')){
+	if ($this.hasClass('bill-link')){
+		showCitedText(target);
+	} else {
+		showAnnotation(target);
+	}
+}
+
+var onToggleClick = function(e){
+	e.preventDefault();
+
+	var $this = $(this);
+
+	if ($this.hasClass('active')){
+		previousPosition = false;
 		$body.velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
 		return;
 	}
 
-	var target = $(this).attr('href');
+	if ($this.hasClass('bill')){
+		showCitedText(previousPosition||'#bill');
+	}
 
+	if ($this.hasClass('annotations')){
+		showAnnotation(previousPosition||'#annotations');
+	}
+};
+
+var showAnnotation = function(target){
+	mode = 'annotations';
+
+	if (target !== '#annotations'){
+		previousPosition = '#bill-' + target.split('-')[1];
+	}
+
+	$body.removeClass().addClass('annotations-active');
+	$('.mode .toggle').removeClass('active');
+	$('.toggle.annotations').addClass('active');
+
+	$annotations.velocity("fadeIn", { duration: 300 });
+	$bill.velocity("fadeOut", {
+		duration: 300,
+		complete: function(){
+			$(target).velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
+		}
+	});
+}
+
+var showCitedText = function(target){
 	mode = 'fullText';
+
+	if (target !== '#bill'){
+		previousPosition = '#annotation-' + target.split('-')[1];
+	}
+
 	$body.removeClass().addClass('fulltext-active');
 	$('.mode .toggle').removeClass('active');
-	$('.toggle.bill-link').addClass('active');
+	$('.toggle.bill').addClass('active');
 
 	$bill.velocity("fadeIn", { duration: 300 });
 	$annotations.velocity("fadeOut", {
 		duration: 300,
 		complete: function(){
 			setupChapterAffix();
-			$(target).velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
-		}
-	});
-
-}
-
-var onAnnotationLinkClick = function(e) {
-	e.preventDefault();
-
-	if ($(this).hasClass('active')){
-		$body.velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
-		return;
-	}
-
-	var target = $(this).attr('href');
-	mode = 'annotations';
-
-	$body.removeClass().addClass('annotations-active');
-	$('.mode .toggle').removeClass('active');
-	$('.toggle.annotation-link').addClass('active');
-
-	$annotations.velocity("fadeIn", { duration: 300 });
-	$bill.velocity("fadeOut", {
-		duration: 300,
-		complete: function(){
 			$(target).velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
 		}
 	});
@@ -90,7 +114,7 @@ var onWindowResize = function(){
 }
 
 var onDocumentScroll = function() {
-	var scrollPercentage = $(window).scrollTop() / $(window).height()
+	var scrollPercentage = $(window).scrollTop() / $(window).height();
 
 	if (mode === 'annotations' && scrollPercentage > 1){
 		$body.addClass('show-title');
@@ -102,15 +126,15 @@ var onDocumentScroll = function() {
 $(function() {
 	$body = $('body');
 	$chapterLinks = $('.chapter-nav a');
-	$billLinks = $('.bill-link');
-	$annotationLinks = $('.annotation-link');
+	$documentLinks = $('.annotation-link, .bill-link');
+	$toggleLinks = $('.toggle');
 	$bill = $('#bill');
 	$annotations = $('#annotations');
 	$fullTextButton = $('.bill-link.toggle');
 
 	$chapterLinks.on('click', onChapterClick);
-	$billLinks.on('click', onBillLinkClick);
-	$annotationLinks.on('click', onAnnotationLinkClick);
+	$documentLinks.on('click', onDocumentLinkClick);
+	$toggleLinks.on('click', onToggleClick);
 
 	$(window).on('resize', _.throttle(onWindowResize, 300));
 	$(document).on('scroll', _.throttle(onDocumentScroll, 300));
