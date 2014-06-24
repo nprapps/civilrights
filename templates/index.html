@@ -67,7 +67,7 @@
 
     {% for annotation in COPY.annotations %}
         {% if annotation.title != last_title %}
-        <div class="section-header">
+        <div id="annotation-{{ annotation.title|lower|replace(' ','-') }}" class="section-header">
             <div class="container-fluid">
                 <div class="row">
                     <h2>{{ annotation.title }}</h2>

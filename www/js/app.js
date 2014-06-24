@@ -5,6 +5,8 @@ var $toggleLinks = null;
 var $bill = null;
 var $annotations = null;
 var $fullTextButton = null;
+var $annotationTitles = null;
+var $billTitles = null;
 var mode = 'annotations';
 var previousPosition = false;
 
@@ -63,7 +65,17 @@ var showAnnotation = function(target){
 	$bill.velocity("fadeOut", {
 		duration: 300,
 		complete: function(){
-			$(target).velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
+			$(target).velocity("scroll", {
+				duration: 500,
+				offset: -60,
+				easing: "ease-in-out",
+				complete: function(){
+					$.waypoints('destroy');
+					$annotationTitles.waypoint({
+						handler: setBillWaypoint
+					});
+				}
+			});
 		}
 	});
 }
@@ -84,7 +96,17 @@ var showCitedText = function(target){
 		duration: 300,
 		complete: function(){
 			setupChapterAffix();
-			$(target).velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
+			$(target).velocity("scroll", {
+				duration: 500,
+				offset: -60,
+				easing: "ease-in-out",
+				complete: function(){
+					$.waypoints('destroy');
+					$billTitles.waypoint({
+						handler: setAnnotationWaypoint
+					});
+				}
+			});
 		}
 	});
 }
@@ -123,6 +145,17 @@ var onDocumentScroll = function() {
 	}
 }
 
+var setBillWaypoint = function(){
+	previousPosition = '#fulltext-' + $(this).attr('id').replace('annotation-','');
+	console.log(previousPosition);
+}
+
+var setAnnotationWaypoint = function(element){
+	previousPosition = '#annotation-' + $(this).attr('id').replace('fulltext-','');
+	console.log(previousPosition);
+
+}
+
 $(function() {
 	$body = $('body');
 	$chapterLinks = $('.chapter-nav a');
@@ -131,6 +164,8 @@ $(function() {
 	$bill = $('#bill');
 	$annotations = $('#annotations');
 	$fullTextButton = $('.bill-link.toggle');
+	$annotationTitles = $annotations.find('.section-header');
+	$billTitles = $bill.find('h2');
 
 	$chapterLinks.on('click', onChapterClick);
 	$documentLinks.on('click', onDocumentLinkClick);
@@ -138,6 +173,10 @@ $(function() {
 
 	$(window).on('resize', _.throttle(onWindowResize, 300));
 	$(document).on('scroll', _.throttle(onDocumentScroll, 300));
+
+	$annotationTitles.waypoint({
+		handler: setBillWaypoint
+	});
 
 	onWindowResize();
 });
