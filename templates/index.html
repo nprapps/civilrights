@@ -40,7 +40,7 @@
                     <h1>{{ COPY.content.project_name }}</h1>
                     <h2>{{ COPY.content.project_description }}</h2>
                     <p>{{ COPY.content.byline }}</p>
-                    <hp>{{ COPY.content.pubdate }}</p>
+                    <p>{{ COPY.content.pubdate }}</p>
                 </div>
             </div>
         </div>
@@ -57,7 +57,6 @@
                             <img src="{{ contributor.mug }}">
                             <h4>{{ contributor.name }}</h4>
                             <p>{{ contributor.bio }}</p>
-
                         </div>
                     {% endfor %}
                     </div>
@@ -72,6 +71,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <h2>{{ annotation.title }}</h2>
+                    <h3>{{ annotation.subtitle }}</h3>
                     {% set last_title = annotation.title %}
                 </div>
             </div>
