@@ -16,38 +16,42 @@ var onChapterClick = function(e) {
 
 var onBillLinkClick = function(e) {
 	e.preventDefault();
-	mode = 'fullText';
-	$body.removeClass().addClass('fulltext-active');
+
 
 	if ($(this).hasClass('active')){
 		return;
 	}
 
 	var target = $(this).attr('href');
+
+	mode = 'fullText';
+	$body.removeClass().addClass('fulltext-active');
+	$('.mode .toggle').removeClass('active');
+	$('.toggle.bill-link').addClass('active');
+
 	$bill.velocity("fadeIn", { duration: 300 });
 	$annotations.velocity("fadeOut", {
 		duration: 300,
 		complete: function(){
 			setupChapterAffix();
-			$(target).velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" }) ;
+			$(target).velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
 		}
 	});
 
-	$('.mode .toggle').removeClass('active');
-	$('.toggle.bill-link').addClass('active');
 }
 
 var onAnnotationLinkClick = function(e) {
 	e.preventDefault();
-	mode = 'annotations';
-	$body.removeClass().addClass('annotations-active');
 
 	if ($(this).hasClass('active')){
+		$annotations.velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" }) ;
 		return;
 	}
 
 	var target = $(this).attr('href');
+	mode = 'annotations';
 
+	$body.removeClass().addClass('annotations-active');
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.annotation-link').addClass('active');
 
@@ -55,7 +59,7 @@ var onAnnotationLinkClick = function(e) {
 	$bill.velocity("fadeOut", {
 		duration: 300,
 		complete: function(){
-			$(target).velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" }) ;
+			$(target).velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
 		}
 	});
 }
