@@ -1,27 +1,48 @@
 {% extends '_base.html' %}
 
 {% block header_content %}
-<header>
+<div class="fixed-header">
     <div class="container-fluid">
         <div class="row">
-            <div class="project-header">
-                <h1>{{ COPY.content.project_name }}</h1>
-                <h2>{{ COPY.content.lorem_ipsum }}</h2>
+            <div class="fixed-header-wrapper">
+                <h1><a class="annotation-link" href="#annotations">{{ COPY.content.project_name }}</a></h1>
+                <div class="mode">
+                    <a class="toggle annotation-link active" href="#annotations">Annotations</a>
+                    <a class="toggle bill-link" href="#bill">Full Text</a>
+                </div>
             </div>
         </div>
     </div>
-</header>
+</div>
 {% endblock %}
 
 {% block content %}
 
-<ul id="tab-nav" class="mode-toggle nav nav-pills nav-justified">
-    <li class="active"><a href="#annotations" data-toggle="tab">Annotations</a></li>
-    <li><a href="#bill" data-toggle="tab">Full Text</a></li>
-</ul>
+<!-- <div class="mode-toggle">
+    <div class="container-fluid">
+        <div class="row">
+            <ul class="list-unstyled">
+                <li class="active"><a href="#annotations"><i class="fa fa-angle-left"></i> View Annotations</a></li>
+                <li><a href="#bill" data-toggle="tab">View Full Text <i class="fa fa-angle-right"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div> -->
 
-<div class="tab-content">
-    <div class="tab-pane active annotations" id="annotations">
+<div class="pane-wrapper">
+
+    <div class="annotations" id="annotations">
+
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="project-header">
+                    <h1>{{ COPY.content.project_name }}</h1>
+                    <h2>{{ COPY.content.lorem_ipsum }}</h2>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <div class="contributors">
         <div class="container-fluid">
@@ -72,7 +93,8 @@
     {% endfor %}
     </div>
 
-    <div class="tab-pane bill" id="bill">{% include '_bill.html' %}</div>
+    <div class="bill" id="bill">
+        {% include '_bill.html' %}
+    </div>
 </div>
-
 {% endblock %}
