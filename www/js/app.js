@@ -19,6 +19,7 @@ var onBillLinkClick = function(e) {
 
 
 	if ($(this).hasClass('active')){
+		$body.velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
 		return;
 	}
 
@@ -44,7 +45,7 @@ var onAnnotationLinkClick = function(e) {
 	e.preventDefault();
 
 	if ($(this).hasClass('active')){
-		$annotations.velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" }) ;
+		$body.velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
 		return;
 	}
 
