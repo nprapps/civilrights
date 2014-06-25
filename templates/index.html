@@ -5,10 +5,13 @@
     <div class="container-fluid">
         <div class="row">
             <div class="fixed-header-wrapper">
-                <h1><a class="annotation-link" href="#annotations">{{ COPY.content.project_name }}</a></h1>
-                <div class="mode">
-                    <a class="toggle annotations active" href="#annotations">Annotations</a>
-                    <a class="toggle bill" href="#bill">Full Text</a>
+                <h1><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo.png"></a><a class="annotation-link" href="#annotations">{{ COPY.content.project_name }}</a></h1>
+                <div class="header-tools">
+                    <div class="mode">
+                        <a class="toggle annotations active" href="#annotations">Annotations</a>
+                        <a class="toggle bill" href="#bill">Bill</a>
+                    </div>
+                    <a class="share" href="#"><i class="fa fa-share"></i> Share</a>
                 </div>
             </div>
         </div>
@@ -18,17 +21,6 @@
 
 {% block content %}
 
-<!-- <div class="mode-toggle">
-    <div class="container-fluid">
-        <div class="row">
-            <ul class="list-unstyled">
-                <li class="active"><a href="#annotations"><i class="fa fa-angle-left"></i> View Annotations</a></li>
-                <li><a href="#bill" data-toggle="tab">View Full Text <i class="fa fa-angle-right"></i></a></li>
-            </ul>
-        </div>
-    </div>
-</div> -->
-
 <div class="pane-wrapper">
 
     <div class="annotations" id="annotations">
@@ -37,6 +29,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="project-header">
+                    <h2><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo.png"></a></h2>
                     <h1>{{ COPY.content.project_name }}</h1>
                     <p>{{ COPY.content.project_description }}</p>
                     <p class="byline">{{ COPY.content.byline }}</p>
@@ -83,6 +76,7 @@
                 {% if annotation.is_reply != "TRUE" %}
                 <div class="cited">
                     <p class="text"><a class="bill-link" href="#bill-{{ annotation.key }}">{{ annotation.cited }}</a></p>
+                    <a class="bill-link fulltext-link" href="#bill-{{ annotation.key }}">View in context <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
             <div class="row">

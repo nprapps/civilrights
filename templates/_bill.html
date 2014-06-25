@@ -8,7 +8,7 @@
     {% if key2 %}
         {% set annotation2 = COPY.annotations[key2] %}
         {% set contributor2 = COPY.contributors[annotation2.author_key] %}
-        <img class="annotation-mug" src="{{ contributor2.mug }}" title="{{ contributor2.name }}" alt="{{ contributor2.name }}">
+        <img class="annotation-mug" src="./assets/mugs/{{ contributor2.mug }}" title="{{ contributor2.name }}" alt="{{ contributor2.name }}">
     {% endif %}
 
 {% endmacro %}
