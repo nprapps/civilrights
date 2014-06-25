@@ -117,7 +117,11 @@ def get_secrets():
     A method for accessing our secrets.
     """
     secrets = [
-        'EXAMPLE_SECRET'
+        'TWITTER_API_CONSUMER_KEY',
+        'TWITTER_API_CONSUMER_SECRET',
+        'TWITTER_API_OAUTH_TOKEN',
+        'TWITTER_API_OAUTH_SECRET',
+        'FACEBOOK_API_APP_TOKEN'
     ]
 
     secrets_dict = {}

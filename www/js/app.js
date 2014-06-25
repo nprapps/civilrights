@@ -7,8 +7,11 @@ var $annotations = null;
 var $fullTextButton = null;
 var $annotationTitles = null;
 var $billTitles = null;
+var $shareModal = null;
+
 var mode = 'annotations';
 var previousPosition = false;
+var firstShare = true;
 
 var onChapterClick = function(e) {
 	e.preventDefault();
@@ -158,6 +161,35 @@ var setAnnotationWaypoint = function(element){
 	console.log(previousPosition);
 }
 
+/*
+ * Share modal opened.
+ */
+var onShareModalShown = function(e) {
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'open-share-discuss']);
+    
+    if (firstShare) {
+        loadComments();
+
+        firstShare = false;
+    }
+}
+
+/*
+ * Share modal closed.
+ */
+var onShareModalHidden = function(e) {
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'close-share-discuss']);
+}
+
+/*
+ * Text copied to clipboard.
+ */
+var onClippyCopy = function(e) {
+    alert('Copied to your clipboard!');
+
+    _gaq.push(['_trackEvent', '{{ PROJECT_SLUG }}', 'summary-copied']);
+}
+
 $(function() {
 	$body = $('body');
 	$chapterLinks = $('.chapter-nav a');
@@ -166,6 +198,7 @@ $(function() {
 	$bill = $('#bill');
 	$annotations = $('#annotations');
 	$fullTextButton = $('.bill-link.toggle');
+	$shareModal = $('#share-modal');
 	// $annotationTitles = $annotations.find('.section-header');
 	// $billTitles = $bill.find('.fulltext > div');
 
@@ -180,6 +213,15 @@ $(function() {
 	// 	handler: setBillWaypoint,
 	// 	offset: 71
 	// });
+	
+	$shareModal.on('shown.bs.modal', onShareModalShown);
+    $shareModal.on('hidden.bs.modal', onShareModalHidden);
+
+    var clippy = new ZeroClipboard($(".clippy"));
+
+    clippy.on('ready', function(readyEvent) {
+        clippy.on('aftercopy', onClippyCopy);
+    });
 
 	onWindowResize();
 });

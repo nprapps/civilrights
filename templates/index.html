@@ -11,7 +11,7 @@
                         <a class="toggle annotations active" href="#annotations">Annotations</a>
                         <a class="toggle bill" href="#bill">Bill</a>
                     </div>
-                    <a class="share" href="#"><i class="fa fa-share"></i> Share</a>
+                    <a class="share" data-toggle="modal" data-backdrop="static" data-target="#share-modal"><i class="fa fa-share"></i> Share</a>
                 </div>
             </div>
         </div>
@@ -97,4 +97,6 @@
         {% include '_bill.html' %}
     </div>
 </div>
+
+{% include "_share_modal.html" %}
 {% endblock %}
