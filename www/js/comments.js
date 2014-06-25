@@ -179,8 +179,10 @@ $(function() {
     disqus_identifier = APP_CONFIG.PROJECT_SLUG + '-' + APP_CONFIG.DISQUS_UUID;
 
     // Set some vars for JST rendering, e.g., the comments frame.
-    var context = $.extend(APP_CONFIG, {});
-    var html = JST.comments();
+    var context = $.extend(APP_CONFIG, {
+        'COPY': COPY
+    });
+    var html = JST.comments(context);
     $comments.html(html);
 
     // Click handler for the show comments button.
