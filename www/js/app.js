@@ -60,7 +60,7 @@ var showAnnotation = function(target){
 		previousPosition = '#bill-' + target.split('-')[1];
 	}
 
-	$body.removeClass().addClass('annotations-active');
+	$body.removeClass().addClass('annotations-active show-title');
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.annotations').addClass('active');
 
@@ -73,11 +73,11 @@ var showAnnotation = function(target){
 				offset: -71,
 				easing: "ease-in-out",
 				complete: function(){
-					// $.waypoints('destroy');
-					// $annotationTitles.waypoint({
-					// 	handler: setBillWaypoint,
-					// 	offset: 71
-					// });
+					$.waypoints('destroy');
+					$billLinks.waypoint({
+						handler: setWaypoint,
+						offset: 150
+					});
 				}
 			});
 		}
@@ -106,11 +106,11 @@ var showCitedText = function(target){
 				offset: -71,
 				easing: "ease-in-out",
 				complete: function(){
-					// $.waypoints('destroy');
-					// $billTitles.waypoint({
-					// 	handler: setAnnotationWaypoint,
-					// 	offset: 71
-					// });
+					$.waypoints('destroy');
+					$annotationLinks.waypoint({
+						handler: setWaypoint,
+						offset: 150
+					});
 				}
 			});
 		}
@@ -151,14 +151,8 @@ var onDocumentScroll = function() {
 	}
 }
 
-var setBillWaypoint = function(){
-	previousPosition = '#fulltext-' + $(this).attr('id').replace('annotation-','');
-	console.log(previousPosition);
-}
-
-var setAnnotationWaypoint = function(element){
-	previousPosition = '#annotation-' + $(this).attr('id').replace('fulltext-','');
-	console.log(previousPosition);
+var setWaypoint = function(){
+	previousPosition = $(this).attr('href');
 }
 
 /*
@@ -194,13 +188,13 @@ $(function() {
 	$body = $('body');
 	$chapterLinks = $('.chapter-nav a');
 	$documentLinks = $('.annotation-link, .bill-link');
+	$annotationLinks = $documentLinks.filter('.annotation-link');
+	$billLinks = $documentLinks.filter('.bill-link');
 	$toggleLinks = $('.toggle');
 	$bill = $('#bill');
 	$annotations = $('#annotations');
 	$fullTextButton = $('.bill-link.toggle');
 	$shareModal = $('#share-modal');
-	// $annotationTitles = $annotations.find('.section-header');
-	// $billTitles = $bill.find('.fulltext > div');
 
 	$chapterLinks.on('click', onChapterClick);
 	$documentLinks.on('click', onDocumentLinkClick);
@@ -209,11 +203,6 @@ $(function() {
 	$(window).on('resize', _.throttle(onWindowResize, 300));
 	$(document).on('scroll', _.throttle(onDocumentScroll, 300));
 
-	// $annotationTitles.waypoint({
-	// 	handler: setBillWaypoint,
-	// 	offset: 71
-	// });
-	
 	$shareModal.on('shown.bs.modal', onShareModalShown);
     $shareModal.on('hidden.bs.modal', onShareModalHidden);
 
@@ -224,4 +213,9 @@ $(function() {
     });
 
 	onWindowResize();
+
+	$billLinks.waypoint({
+		handler: setWaypoint,
+		offset: 150
+	});
 });
