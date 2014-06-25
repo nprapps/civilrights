@@ -354,29 +354,35 @@ header {
 			.make-sm-column(8);
 		}
 
-		.cited p {
-			font-family: @font-family-serif;
-			font-style: italic;
-			color: @gray;
-			padding: 2px 5px;
+		.cited {
+			p.text {
+				font-family: @font-family-serif;
+				font-style: italic;
+				color: @gray;
+				padding: 2px 5px;
 
-			b {
-				background: @yellow-light;
-				color: @gray-dark;
-				font-weight: normal;
-			}
+				b {
+					background: @yellow-light;
+					color: @gray-dark;
+					font-weight: normal;
+				}
 
-			a {
-				color: @gray-light;
+				a {
+					color: @gray-light;
 
-				&:hover {
-					text-decoration: none;
+					&:hover {
+						text-decoration: none;
 
-					b {
-						text-decoration: underline;
+						b {
+							text-decoration: underline;
+						}
 					}
 				}
 			}
+
+			p.reference {
+				font-size: 0.8em; 
+			}	
 		}
 	}
 
