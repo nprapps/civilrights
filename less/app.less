@@ -43,7 +43,7 @@ body {
 	}
 
 	h1 {
-		font-size: floor(@font-size-base * 2.25);
+		font-size: floor(@font-size-base * 1.5);
 		font-weight: bold;
 		text-transform: uppercase;
 		color: #fff;
@@ -52,6 +52,7 @@ body {
 		.transition(opacity 0.5s ease-in-out);
 
 		.hidden-xs;
+		.pull-left;
 
 		.npr-logo img {
 			width: auto;
@@ -65,24 +66,47 @@ body {
 		}
 	}
 
+	.header-tools {
+		font-size: 12px;
+
+		@media screen and (min-width: @screen-sm){
+			.pull-right;
+		}
+	}
+
+	.share {
+		.pull-right;
+
+		background: @primary-control;
+		color: #fff;
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		margin: 15px 0 0 15px;
+		text-transform: uppercase;
+		padding: 0 10px;
+	}
+
 	.mode {
-		position: absolute;
-		right: @grid-gutter-width / 2;
-		top: 15px;
+		// position: absolute;
+		// right: @grid-gutter-width / 2;
+		// top: 15px;
 		display: table;
+		margin-top: 15px;
+		.pull-left;
 
 		a {
 			display: table-cell;
-			background: @gray;
+			background: @brand-primary;
 			color: #fff;
 			height: 30px;
 			line-height: 30px;
 			padding: 0 10px;
 			text-transform: uppercase;
-			font-size: 12px;
 
 			&.active {
-				background: @brand-primary;
+				color: @brand-primary;
+				background: #fff;
 			}
 		}
 
