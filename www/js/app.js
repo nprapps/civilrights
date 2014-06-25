@@ -57,7 +57,7 @@ var showAnnotation = function(target){
 		previousPosition = '#bill-' + target.split('-')[1];
 	}
 
-	$body.removeClass().addClass('annotations-active');
+	$body.removeClass().addClass('annotations-active show-title');
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.annotations').addClass('active');
 
