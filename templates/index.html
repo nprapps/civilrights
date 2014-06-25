@@ -83,9 +83,6 @@
                 {% if annotation.is_reply != "TRUE" %}
                 <div class="cited">
                     <p class="text"><a class="bill-link" href="#bill-{{ annotation.key }}">{{ annotation.cited }}</a></p>
-                    {% if annotation.section != "" %}
-                    <p class="reference"><a class="bill-link" href="#bill-{{ annotation.key }}">Excerpt from  section {{ annotation.section }} &raquo;</a></p>
-                    {% endif %}
                 </div>
             </div>
             <div class="row">
