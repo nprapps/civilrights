@@ -174,6 +174,6 @@ $(function() {
 
 	$billLinks.waypoint({
 		handler: setWaypoint,
-		offset: 101
+		offset: 150
 	});
 });
