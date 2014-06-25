@@ -38,9 +38,9 @@
             <div class="row">
                 <div class="project-header">
                     <h1>{{ COPY.content.project_name }}</h1>
-                    <h2>{{ COPY.content.project_description }}</h2>
-                    <p>{{ COPY.content.byline }}</p>
-                    <p>{{ COPY.content.pubdate }}</p>
+                    <p>{{ COPY.content.project_description }}</p>
+                    <p class="byline">{{ COPY.content.byline }}</p>
+                    <p class="pubdate">{{ COPY.content.pubdate }}</p>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                         <h3>With Commentary By</h3>
                     {% for contributor in COPY.contributors %}
                         <div class="contributor">
-                            <img src="{{ contributor.mug }}">
+                            <img src="./assets/mugs/{{ contributor.mug }}">
                             <h4>{{ contributor.name }}</h4>
                             <p>{{ contributor.bio }}</p>
                         </div>
@@ -90,7 +90,7 @@
             </div>
             <div class="row">
                 <div class="annotator">
-                    <img class="mug" src="{{ contributor.mug }}">
+                    <img class="mug" src="./assets/mugs/{{ contributor.mug }}">
                     <p class="name">{{ contributor.name }}</p>
                 </div>
                 <p class="content">{{ annotation.content }}</p>

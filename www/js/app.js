@@ -67,13 +67,14 @@ var showAnnotation = function(target){
 		complete: function(){
 			$(target).velocity("scroll", {
 				duration: 500,
-				offset: -60,
+				offset: -71,
 				easing: "ease-in-out",
 				complete: function(){
-					$.waypoints('destroy');
-					$annotationTitles.waypoint({
-						handler: setBillWaypoint
-					});
+					// $.waypoints('destroy');
+					// $annotationTitles.waypoint({
+					// 	handler: setBillWaypoint,
+					// 	offset: 71
+					// });
 				}
 			});
 		}
@@ -95,16 +96,18 @@ var showCitedText = function(target){
 	$annotations.velocity("fadeOut", {
 		duration: 300,
 		complete: function(){
-			setupChapterAffix();
+			onWindowResize();
+
 			$(target).velocity("scroll", {
 				duration: 500,
-				offset: -60,
+				offset: -71,
 				easing: "ease-in-out",
 				complete: function(){
-					$.waypoints('destroy');
-					$billTitles.waypoint({
-						handler: setAnnotationWaypoint
-					});
+					// $.waypoints('destroy');
+					// $billTitles.waypoint({
+					// 	handler: setAnnotationWaypoint,
+					// 	offset: 71
+					// });
 				}
 			});
 		}
@@ -128,9 +131,9 @@ var setupChapterAffix = function() {
 
 var onWindowResize = function(){
 	$('header').css('height', $(window).height());
-	$('body').scrollspy({ target: '.chapter-nav', offset: 60 });
+	$('body').scrollspy({ target: '.chapter-nav', offset: 71 });
 
-	if ( $fullTextButton.hasClass('active') ) {
+	if (mode === 'fullText' ) {
 		setupChapterAffix();
 	}
 }
@@ -153,7 +156,6 @@ var setBillWaypoint = function(){
 var setAnnotationWaypoint = function(element){
 	previousPosition = '#annotation-' + $(this).attr('id').replace('fulltext-','');
 	console.log(previousPosition);
-
 }
 
 $(function() {
@@ -164,8 +166,8 @@ $(function() {
 	$bill = $('#bill');
 	$annotations = $('#annotations');
 	$fullTextButton = $('.bill-link.toggle');
-	$annotationTitles = $annotations.find('.section-header');
-	$billTitles = $bill.find('h2');
+	// $annotationTitles = $annotations.find('.section-header');
+	// $billTitles = $bill.find('.fulltext > div');
 
 	$chapterLinks.on('click', onChapterClick);
 	$documentLinks.on('click', onDocumentLinkClick);
@@ -174,9 +176,10 @@ $(function() {
 	$(window).on('resize', _.throttle(onWindowResize, 300));
 	$(document).on('scroll', _.throttle(onDocumentScroll, 300));
 
-	$annotationTitles.waypoint({
-		handler: setBillWaypoint
-	});
+	// $annotationTitles.waypoint({
+	// 	handler: setBillWaypoint,
+	// 	offset: 71
+	// });
 
 	onWindowResize();
 });
