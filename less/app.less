@@ -359,16 +359,17 @@ header {
 				font-family: @font-family-serif;
 				font-style: italic;
 				color: @gray;
-				padding: 2px 5px;
+				padding: 10px;
+				background: @gray-lighter;
 
 				b {
 					background: @yellow-light;
-					color: @gray-dark;
+					color: @gray-darker;
 					font-weight: normal;
 				}
 
 				a {
-					color: @gray-light;
+					color: @gray;
 
 					&:hover {
 						text-decoration: none;
@@ -385,6 +386,7 @@ header {
 	.bill {
 		display: none;
 		padding-top: 60px + @line-height-computed * 2;
+		background: #eee;
 
 		.fulltext-wrapper {
 			.make-row();
