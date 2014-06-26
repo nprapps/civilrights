@@ -15,7 +15,7 @@ NAMES
 """
 # Project name to be used in urls
 # Use dashes, not underscores!
-PROJECT_SLUG = 'civilrights'
+PROJECT_SLUG = 'behind-the-civil-rights-act'
 
 # Project name to be used in file paths
 PROJECT_FILENAME = 'civilrights'
