@@ -52,6 +52,7 @@ body {
 		.transition(opacity 0.5s ease-in-out);
 
 		.hidden-xs;
+		.hidden-sm;
 		.pull-left;
 
 		.npr-logo img {
@@ -69,7 +70,7 @@ body {
 	.header-tools {
 		font-size: 12px;
 
-		@media screen and (min-width: @screen-sm){
+		@media screen and (min-width: @screen-md){
 			.pull-right;
 		}
 	}
@@ -131,7 +132,7 @@ body {
 			}
 		}
 
-		@media screen and (max-width: @screen-xs-max){
+		@media screen and (max-width: @screen-sm-max){
 			position: static;
 			margin: 15px auto 0;
 		}
@@ -144,7 +145,7 @@ body {
 			opacity: 0;
 		}
 
-		@media screen and (max-width: @screen-xs-max){
+		@media screen and (max-width: @screen-sm-max){
 			opacity: 0;
 		}
 	}
@@ -156,7 +157,7 @@ body {
 			opacity: 1;
 		}
 
-		@media screen and (max-width: @screen-xs-max){
+		@media screen and (max-width: @screen-sm-max){
 			opacity: 1;
 		}
 	}
@@ -181,7 +182,7 @@ header {
 	}
 
 	.project-header {
-		.make-sm-column(7);
+		.make-sm-column(8);
 		.make-sm-column-push(1);
 	}
 
@@ -205,6 +206,11 @@ header {
 	    @media screen and (min-width: @screen-sm){
 	    	font-size: @font-size-large;
 	    }
+	}
+
+	.scroll-down {
+		.make-sm-column(12);
+		text-align: center;
 	}
 }
 
