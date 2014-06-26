@@ -393,8 +393,12 @@ header {
 		+ .annotation {
 			margin-top: @line-height-computed;
 
-			.cited:before {
-				display: none;
+			.cited {
+				margin-top: 0;
+
+				&:before {
+					display: none;
+				}
 			}
 		}
 	}
@@ -441,12 +445,15 @@ header {
 			.make-sm-column-offset(3);
 			.make-sm-column(8);
 
-			&:before {
-				content: ' ';
-				display: block;
-				border-bottom: 2px solid @light-gray;
-				margin-bottom: @line-height-computed;
-			}
+
+			margin-top: @line-height-computed;
+
+			// &:before {
+			// 	content: ' ';
+			// 	display: block;
+			// 	border-bottom: 2px solid @light-gray;
+			// 	margin-bottom: @line-height-computed;
+			// }
 		}
 
 		.content {
