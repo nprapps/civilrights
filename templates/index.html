@@ -11,7 +11,7 @@
                         <a class="toggle annotations active" href="#annotations">{{ COPY.content.annotations_button }}</a>
                         <a class="toggle bill" href="#bill">{{ COPY.content.bill_button }}</a>
                     </div>
-                    <a class="share" data-toggle="modal" data-backdrop="static" data-target="#share-modal"><i class="fa fa-share"></i> {{ COPY.content.share_button }}</a>
+                    <a class="share" data-toggle="modal" data-backdrop="static" data-target="#share-modal"><i class="fa fa-share"></i> <span class="button-text">{{ COPY.content.share_button }}</span></a>
                 </div>
             </div>
         </div>
@@ -60,7 +60,9 @@
 
     {% for annotation in COPY.annotations %}
         {% if annotation.title != last_title %}
-        <div id="annotation-{{ annotation.title|lower|replace(' ','-') }}" class="section-header">
+        {% set image = annotation.title|lower|replace(' ','-') %}
+        {% set filename = COPY.section_images[image] %}
+        <div id="annotation-{{ annotation.title|lower|replace(' ','-') }}" class="section-header" style="background-image: url('./assets/section-images/{{ filename }}')">
             <div class="container-fluid">
                 <div class="row">
                     <h2>{{ annotation.title }}</h2>
