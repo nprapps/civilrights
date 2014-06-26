@@ -619,12 +619,12 @@ header {
 
 		p {
 			font-family: @font-family-serif;
-			font-size: @font-size-large;
+			font-size: @font-size-base;
 
-			// @media screen and (min-width: @screen-lg){
-			// 	font-size: ceil(@font-size-base * 1.3125);
-			// 	margin-bottom: @line-height-computed;
-			// }
+			@media screen and (min-width: @screen-sm){
+				font-size: @font-size-large);
+				margin-bottom: @line-height-computed;
+			}
 		}
 
 		h2,
