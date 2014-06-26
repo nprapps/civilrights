@@ -52,6 +52,7 @@ body {
 		.transition(opacity 0.5s ease-in-out);
 
 		.hidden-xs;
+		.hidden-sm;
 		.pull-left;
 
 		.npr-logo img {
@@ -69,7 +70,7 @@ body {
 	.header-tools {
 		font-size: 12px;
 
-		@media screen and (min-width: @screen-sm){
+		@media screen and (min-width: @screen-md){
 			.pull-right;
 		}
 	}
@@ -131,7 +132,7 @@ body {
 			}
 		}
 
-		@media screen and (max-width: @screen-xs-max){
+		@media screen and (max-width: @screen-sm-max){
 			position: static;
 			margin: 15px auto 0;
 		}
@@ -144,7 +145,7 @@ body {
 			opacity: 0;
 		}
 
-		@media screen and (max-width: @screen-xs-max){
+		@media screen and (max-width: @screen-sm-max){
 			opacity: 0;
 		}
 	}
@@ -156,7 +157,7 @@ body {
 			opacity: 1;
 		}
 
-		@media screen and (max-width: @screen-xs-max){
+		@media screen and (max-width: @screen-sm-max){
 			opacity: 1;
 		}
 	}
@@ -204,6 +205,11 @@ header {
 	    @media screen and (min-width: @screen-sm){
 	    	font-size: @font-size-large;
 	    }
+	}
+
+	.scroll-down {
+		.make-xs-column(12);
+		text-align: center;
 	}
 }
 
@@ -465,7 +471,10 @@ header {
 			.make-row();
 
 			> h1 {
-				.make-sm-column(12);
+				.make-sm-column(10);
+				.make-sm-column-offset(1);
+				.make-md-column(11);
+				.make-md-column-offset(0);
 			}
 
 			.chapter-nav {
@@ -535,16 +544,23 @@ header {
 				}
 
 				@media screen and (max-width: @screen-sm-max){
+					&.nav,
 					&.affix,
 					&.affix-top,
 					&.affix-bottom {
 						position: static !important;
 						width: auto;
 						max-width: 100%;
+						padding: 0;
+						margin: 0;
 
 						.active a {
-							color: inherit;
-							background: inherit;
+							color: @text-color;
+							background: transparent;
+
+							.section-title {
+								color: @gray-lighter;
+							}
 						}
 					}
 
@@ -588,6 +604,10 @@ header {
 		h3 {
 			font-weight: bold;
 
+			@media screen and (max-width: @screen-sm-max){
+				font-size: floor(@font-size-base * 1.125);
+			}
+
 			+ h4,
 			+ h5 {
 				margin-top: 0;
@@ -597,6 +617,10 @@ header {
 		h4 {
 			margin-top: @line-height-computed * 2;
 
+			@media screen and (max-width: @screen-sm-max){
+				font-size: @font-size-base;
+			}
+
 			+ h5 {
 				margin-top: 0;
 			}
@@ -604,8 +628,11 @@ header {
 
 		h5 {
 			color: @gray-light;
-
 			margin-top: @line-height-computed * 2;
+
+			@media screen and (max-width: @screen-sm-max){
+				font-size: @font-size-small;
+			}
 		}
 
 		h2,
@@ -632,17 +659,29 @@ header {
 		h4,
 		h5,
 		p {
-			margin-right: 44px + @grid-gutter-width / 2;
+			margin-left: 44px + @grid-gutter-width / 2;
+
+			@media screen and (min-width: @screen-sm){
+				margin-left: 0;
+				margin-right: 44px + @grid-gutter-width / 2;
+			}
 		}
 
 		.annotation-mug {
-			float: right;
-			clear: right;
+			float: left;
+			clear: left;
 			width: 44px;
-			margin-right: -(44px + @grid-gutter-width / 2);
+			margin-left: -(44px + @grid-gutter-width / 2);
 			margin-bottom: 5px;
 			.img-responsive;
 			.img-circle;
+
+			@media screen and (min-width: @screen-sm){
+				float: right;
+				clear: right;
+				margin-left: 0;
+				margin-right: -(44px + @grid-gutter-width / 2);
+			}
 		}
 
 		.annotation-link {
