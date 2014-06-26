@@ -8,6 +8,7 @@ var $fullTextButton = null;
 var $annotationTitles = null;
 var $billTitles = null;
 var $shareModal = null;
+var $scrollDownButton = null;
 var $w = $(window);
 
 var mode = 'annotations';
@@ -177,6 +178,14 @@ var setWaypoint = function(){
 	previousPosition = $(this).attr('href');
 }
 
+var onScrollDownClick = function(){
+	$('header + .contributors').velocity("scroll", {
+		duration: 500,
+		// offset: -71,
+		easing: "ease-in-out"
+	});
+}
+
 /*
  * Share modal opened.
  */
@@ -217,10 +226,13 @@ $(function() {
 	$annotations = $('#annotations');
 	$fullTextButton = $('.bill-link.toggle');
 	$shareModal = $('#share-modal');
+	$scrollDownButton = $('.scroll-down-button');
+
 
 	$chapterLinks.on('click', onChapterClick);
 	$documentLinks.on('click', onDocumentLinkClick);
 	$toggleLinks.on('click', onToggleClick);
+	$scrollDownButton.on('click', onScrollDownClick);
 
 	$(window).on('resize', _.throttle(onWindowResize, 300));
 	$(document).on('scroll', _.throttle(onDocumentScroll, 300));

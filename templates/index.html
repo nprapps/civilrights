@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="fixed-header-wrapper">
-                <h1><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo.png"></a><a class="annotation-link" href="#annotations">{{ COPY.content.project_name }}</a></h1>
+                <h1><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo.svg"></a><a class="annotation-link" href="#annotations">{{ COPY.content.project_name }}</a></h1>
                 <div class="header-tools">
                     <div class="mode">
                         <a class="toggle annotations active" href="#annotations">{{ COPY.content.annotations_button }}</a>
@@ -29,13 +29,20 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="project-header">
-                    <h2><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo.png"></a></h2>
+                    <h2><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo.svg"></a></h2>
                     <h1>{{ COPY.content.project_name }}</h1>
                     <p>{{ COPY.content.project_description }}</p>
                     <p class="byline">{{ COPY.content.byline }}</p>
                     <p class="pubdate">{{ COPY.content.pubdate }}</p>
                 </div>
-                <div class="scroll-down"><i class="fa fa-angle-down fa-3x"></i></div>
+                <div class="scroll-down">
+                    <a href="javascript:(0)" class="scroll-down-button">
+                        <span class="fa-stack fa-2x">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-angle-down fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </div>
             </div>
         </div>
     </header>
