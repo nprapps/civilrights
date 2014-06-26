@@ -22,15 +22,15 @@ var subResponsiveImages = function() {
 
     // MOBILE
     if ($w.width() < 769 && Modernizr.touch === true) {
-        _.each($('.section-header'), function(img){
-            var responsiveImage = $(img).attr('data-image').replace('.', '-sq-m.');
-            $(img).css('background-image', 'url(\'' + responsiveImage + '\')');
+        _.each($('header,.section-header'), function(sectionHeader) {
+            var imageUrl = $(sectionHeader).attr('data-image').replace('.', '-sq-m.');
+            $(sectionHeader).css('background-image', 'url(\'' + imageUrl + '\')');
         });
     // DESKTOP
     } else {
-        _.each($('.section-header'), function(img) {
-            var responsiveImage = $(img).attr('data-image');
-            $(img).css('background-image', 'url(\'' + responsiveImage + '\')');
+        _.each($('header,.section-header'), function(sectionHeader) {
+            var imageUrl = $(sectionHeader).attr('data-image');
+            $(sectionHeader).css('background-image', 'url(\'' + imageUrl + '\')');
         });
     }
 };
