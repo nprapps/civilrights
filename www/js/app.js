@@ -77,17 +77,14 @@ var onToggleClick = function(e){
 };
 
 var showAnnotation = function(target){
-	mode = 'annotations';
-
-	if (target !== '#annotations'){
-		previousPosition = '#bill-' + target.split('-')[1];
-	}
-
-	$body.removeClass().addClass('annotations-active show-title');
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.annotations').addClass('active');
 
-	$annotations.velocity("fadeIn", { duration: 300 });
+	if (mode !=='annotations'){
+		$body.removeClass().addClass('annotations-active show-title');
+		$annotations.velocity("fadeIn", { duration: 300 });
+	}
+
 	$bill.velocity("fadeOut", {
 		duration: 300,
 		complete: function(){
@@ -105,6 +102,14 @@ var showAnnotation = function(target){
 			});
 		}
 	});
+
+	if (target !== '#annotations'){
+		previousPosition = '#bill-' + target.split('-')[1];
+	} else {
+		previousPosition = false;
+	}
+
+	mode = 'annotations';
 }
 
 var showCitedText = function(target){
@@ -181,7 +186,6 @@ var setWaypoint = function(){
 var onScrollDownClick = function(){
 	$('header + .contributors').velocity("scroll", {
 		duration: 500,
-		// offset: -71,
 		easing: "ease-in-out"
 	});
 }
