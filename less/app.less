@@ -85,6 +85,16 @@ body {
 		margin: 15px 0 0 15px;
 		text-transform: uppercase;
 		padding: 0 10px;
+        cursor: pointer;
+
+        &.active {
+            color: @gray-light;
+            background: #fff;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
 	}
 
 	.mode {
