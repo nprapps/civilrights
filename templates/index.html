@@ -95,6 +95,25 @@
     {% endfor %}
     </div>
 
+    <div class="contributors">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="contributor-wrapper">
+                    <div class="row">
+                        <h3>{{ COPY.content.footer_contributor_header }}</h3>
+                    {% for contributor in COPY.contributors %}
+                        <div class="contributor">
+                            <img src="./assets/mugs/{{ contributor.mug }}">
+                            <h4>{{ contributor.name }}</h4>
+                            <p>{{ contributor.bio_long }}</p>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="bill" id="bill">
         {% include '_bill.html' %}
     </div>
