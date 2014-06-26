@@ -2,6 +2,14 @@
 @import "less/lib/bootstrap/mixins";
 @import "less/lib/prefixer";
 
+
+.modal-content {
+    background-color: #eee;
+
+    border-radius: 0;
+    .box-shadow(0 3px 3px rgba(0,0,0,.1));
+}
+
 .modal-body {
     overflow-x: hidden;
     
@@ -582,5 +590,9 @@
 }
 
 @media (min-width: @screen-md-min) {
-  
+    .modal-lg {
+        width: 700px; 
+    }
 }
+
+
