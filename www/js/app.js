@@ -8,10 +8,32 @@ var $fullTextButton = null;
 var $annotationTitles = null;
 var $billTitles = null;
 var $shareModal = null;
+var $w = $(window);
 
 var mode = 'annotations';
 var previousPosition = false;
 var firstShare = true;
+
+var subResponsiveImages = function() {
+    /*
+    * Replaces large images with small ones for tiny devices.
+    * Contains a test for non-tablet devices.
+    */
+
+    // MOBILE
+    if ($w.width() < 769 && Modernizr.touch === true) {
+        _.each($('.section-header'), function(img){
+            var responsiveImage = $(img).attr('data-image').replace('.', '-sq-m.');
+            $(img).css('background-image', 'url(\'' + responsiveImage + '\')');
+        });
+    // DESKTOP
+    } else {
+        _.each($('.section-header'), function(img) {
+            var responsiveImage = $(img).attr('data-image');
+            $(img).css('background-image', 'url(\'' + responsiveImage + '\')');
+        });
+    }
+};
 
 var onChapterClick = function(e) {
 	e.preventDefault();
@@ -213,6 +235,7 @@ $(function() {
     });
 
 	onWindowResize();
+	subResponsiveImages();
 
 	$billLinks.waypoint({
 		handler: setWaypoint,
