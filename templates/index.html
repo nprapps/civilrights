@@ -47,7 +47,7 @@
         </div>
     </header>
 
-    <div class="contributors">
+    <div class="contributors contributors-short">
         <div class="container-fluid">
             <div class="row">
                 <div class="contributor-wrapper">
@@ -68,14 +68,25 @@
 
     {% for annotation in COPY.annotations %}
         {% if annotation.title != last_title %}
-        {% set image = annotation.title|lower|replace(' ','-') %}
-        {% set filename = COPY.section_images[image].filename %}
-        <div id="annotation-{{ annotation.title|lower|replace(' ','-') }}" class="section-header" data-image="./assets/section-images/{{ filename }}">
+        {% set slug = annotation.title|lower|replace(' ','-') %}
+        {% set section_image = COPY.section_images[slug] %}
+        <div id="annotation-{{ annotation.title|lower|replace(' ','-') }}" class="section-header" data-image="assets/section-images/{{ section_image.filename }}">
+            <div class="section-header-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="section-header-title">
+                            <h2>{{ annotation.title }}</h2>
+                            <h3>{{ annotation.subtitle }}</h3>
+                        </div>
+                        {% set last_title = annotation.title %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-header-caption">
             <div class="container-fluid">
                 <div class="row">
-                    <h2>{{ annotation.title }}</h2>
-                    <h3>{{ annotation.subtitle }}</h3>
-                    {% set last_title = annotation.title %}
+                    <p>{{ section_image.caption }} <span class="credit">{{ section_image.credit }}</span></p>
                 </div>
             </div>
         </div>
