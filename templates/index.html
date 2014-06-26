@@ -69,7 +69,7 @@
     {% for annotation in COPY.annotations %}
         {% if annotation.title != last_title %}
         {% set image = annotation.title|lower|replace(' ','-') %}
-        {% set filename = COPY.section_images[image] %}
+        {% set filename = COPY.section_images[image].filename %}
         <div id="annotation-{{ annotation.title|lower|replace(' ','-') }}" class="section-header" data-image="./assets/section-images/{{ filename }}">
             <div class="container-fluid">
                 <div class="row">
