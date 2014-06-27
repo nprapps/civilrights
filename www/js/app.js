@@ -23,7 +23,7 @@ var subResponsiveImages = function() {
     */
 
     // MOBILE
-    if ($window.width() < 769 && Modernizr.touch === true) {
+    if ($window.width() < 768 && Modernizr.touch === true) {
         _.each($('header,.section-header'), function(sectionHeader) {
             var imageUrl = $(sectionHeader).attr('data-image').replace('.', '-sq-m.');
             $(sectionHeader).css('background-image', 'url(\'' + imageUrl + '\')');
@@ -35,6 +35,8 @@ var subResponsiveImages = function() {
             $(sectionHeader).css('background-image', 'url(\'' + imageUrl + '\')');
         });
     }
+
+    $('header').css('opacity', 1);
 };
 
 var onChapterClick = function(e) {
@@ -250,6 +252,28 @@ var setupChapterAffix = function() {
   				}
 			}
 		})
+	}
+}
+
+var onWindowResize = function(){
+	$('header').css({
+		'height': $(window).height(),
+		'min-height': 0
+	});
+	$('body').scrollspy({ target: '.chapter-nav', offset: 71 });
+
+	if (mode === 'fullText' ) {
+		setupChapterAffix();
+	}
+}
+
+var onDocumentScroll = function() {
+	var scrollPercentage = $(window).scrollTop() / $(window).height();
+
+	if (mode === 'annotations' && scrollPercentage > 1){
+		$body.addClass('show-title');
+	} else {
+		$body.removeClass('show-title');
 	}
 }
 
