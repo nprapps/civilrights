@@ -269,6 +269,14 @@ header {
 		margin-bottom: @line-height-computed;
 		overflow: hidden;
 
+      	@media screen and (min-width: @screen-sm){
+            height: 125px;
+
+            &.long {
+                height: 185px;
+            }
+		}
+
 		img {
 			.img-responsive;
 			.img-circle;
