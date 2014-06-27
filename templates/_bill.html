@@ -13,6 +13,8 @@
 
 {% endmacro %}
 
+{% filter unescape|smartypants %}
+
 <div class="container-fluid">
         <div class="fulltext-wrapper">
             <h1>The 1964 Civil Rights Act</h1>
@@ -356,9 +358,7 @@
 
                 <p>
                     (b)
-                    {{ excerpt("21") }}&quot;
-                    Desegregation
-                    &quot; means the assignment of students to public schools and within such schools without regard to their race, color, religion, or national origin, but &quot;desegregation&quot; shall not mean the assignment of students to public schools in order to overcome racial imbalance.</a>
+                    {{ excerpt("21") }}&quot;Desegregation&quot; means the assignment of students to public schools and within such schools without regard to their race, color, religion, or national origin, but &quot;desegregation&quot; shall not mean the assignment of students to public schools in order to overcome racial imbalance.</a>
                 </p>
 
                 <p>
@@ -1436,3 +1436,5 @@
             </div>
         </div>
 </div>
+
+{% endfilter %}

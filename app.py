@@ -5,13 +5,17 @@ import json
 import argparse
 from flask import Flask, render_template
 
+from typogrify.templatetags import jinja_filters
+
 import app_config
-from render_utils import make_context, urlencode_filter
+from render_utils import make_context, urlencode_filter, unescape_filter
 import static
 
 app = Flask(__name__)
 
 app.jinja_env.filters['urlencode'] = urlencode_filter
+app.jinja_env.filters['unescape'] = unescape_filter
+jinja_filters.register(app.jinja_env)
 
 # Example application views
 @app.route('/')

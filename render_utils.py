@@ -193,3 +193,12 @@ def urlencode_filter(s):
 
     return Markup(s)
 
+def unescape_filter(s):
+    """
+    Unescape Markup strings
+    """
+
+    s = s.unescape()
+
+    return s
+
