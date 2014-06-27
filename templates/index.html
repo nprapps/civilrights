@@ -26,24 +26,27 @@
     <div class="annotations" id="annotations">
 
     <header data-image="assets/section-images/00bus-promo.jpg">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="project-header">
-                    <h2><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo.svg"></a></h2>
-                    <h1>{{ COPY.content.project_name }}</h1>
-                    <p>{{ COPY.content.project_description }}</p>
-                    <p class="byline">{{ COPY.content.byline }}</p>
-                    <p class="pubdate">{{ COPY.content.pubdate }}</p>
-                </div>
-                <div class="scroll-down">
-                    <a href="javascript:(0)" class="scroll-down-button">
-                        <span class="fa-stack fa-2x">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-angle-down fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
+        <div class="project-header-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="project-header">
+                        <h4><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo.svg"></a></h4>
+                        <h1>{{ COPY.content.project_name }}</h1>
+                        <h2>{{ COPY.content.project_description }}</h2>
+                        <p class="byline">{{ COPY.content.byline }}</p>
+                        <p class="pubdate">{{ COPY.content.pubdate }}</p>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="scroll-down">
+            <a href="javascript:(0)" class="scroll-down-button">
+                <span class="fa-stack fa-2x">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-angle-down fa-stack-1x fa-inverse"></i>
+                </span>
+            </a>
         </div>
     </header>
 
@@ -52,7 +55,7 @@
             <div class="row">
                 <div class="contributor-wrapper">
                     <div class="row">
-                        <p class"explainer">{{ COPY.content.explainer }}</p>
+                        <p class="explainer">{{ COPY.content.explainer }}</p>
                         <h3>{{ COPY.content.contributor_header }}</h3>
                     {% for contributor in COPY.contributors %}
                         <div class="contributor">
@@ -100,7 +103,6 @@
                 {% if annotation.is_reply != "TRUE" %}
                 <div class="cited">
                     <p class="text"><a class="bill-link" href="#bill-{{ annotation.key }}">{{ annotation.cited|unescape|smartypants }}</a></p>
-                    <a class="bill-link fulltext-link" href="#bill-{{ annotation.key }}">View in context <i class="fa fa-search-plus"></i></a>
                 </div>
             </div>
             <div class="row">

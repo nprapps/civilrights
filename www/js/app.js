@@ -35,6 +35,8 @@ var subResponsiveImages = function() {
             $(sectionHeader).css('background-image', 'url(\'' + imageUrl + '\')');
         });
     }
+
+    $('header').css('opacity', 1);
 };
 
 var onChapterClick = function(e) {
@@ -218,7 +220,10 @@ var setupChapterAffix = function() {
 }
 
 var onWindowResize = function(){
-	$('header').css('height', $(window).height());
+	$('header').css({
+		'height': $(window).height(),
+		'min-height': 0
+	});
 	$('body').scrollspy({ target: '.chapter-nav', offset: 71 });
 
 	if (mode === 'fullText' ) {

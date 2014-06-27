@@ -145,33 +145,54 @@ h1,h2,h3,h4,h5,h6 {
 header {
 	position: relative;
 	margin: 0;
-	background-color: #000;
-	background-position: 50% 50%;
+	background-color: #fff;
+	background-position: 50% 0%;
 	background-size: cover;
-	color: #fff;
-	text-shadow: rgba(0,0,0,0.3) 0 0 5px;
+	min-height: 1000em;
+	opacity: 0;
+	.transition(opacity 0.7s ease-in-out);
 
-	.container-fluid {
+	// color: #fff;
+	// text-shadow: rgba(0,0,0,0.7) 0 0 10px;
+
+	.project-header-wrapper {
 		position: absolute;
-		bottom: @line-height-computed;
+		top: 0;
 		left: 0;
 		right: 0;
+
+		// background: rgba(0,0,0,0.6);
+		padding: @line-height-computed 0;
 	}
 
 	.project-header {
-		.make-sm-column(7);
+		.make-sm-column(12);
 		.make-sm-column-push(0);
+	}
+
+	.project-description-wrapper {
+
+	}
+
+	.project-description{
+		.make-sm-column(12);
 	}
 
 	h1 {
 		text-transform: uppercase;
 		font-weight: bold;
 	    line-height: 1.1;
-	    font-size: @font-size-base * 1.5;
+	    font-size: 7vw;
         margin-left: -3px;
 
+        margin-bottom: @line-height-computed / 2;
+
 		@media screen and (min-width: @screen-sm){
-			font-size: @font-size-base * 3.75;
+			font-size: 5vw;
+		}
+
+		@media screen and (min-width: @screen-sm) and (min-height: @screen-sm){
+			font-size: 7vw;
 		}
 
         @media screen and (max-width: @screen-md-max) {
@@ -183,33 +204,67 @@ header {
         }
 	}
 
+	h2 {
+		margin-bottom: @line-height-computed / 2;
+		font-size: 3vw;
+		text-transform: uppercase;
+
+		@media screen and (min-width: @screen-sm){
+			font-size: 2vw;
+		}
+
+		@media screen and (min-width: @screen-md){
+			font-size: 1.75vw;
+		}
+	}
+
 	p {
 	    font-size: @font-size-small;
 	    line-height: 1.3;
 	    color: #fff;
 
 	    @media screen and (min-width: @screen-sm){
-	    	font-size: @font-size-large;
+	    	font-size: @font-size-base;
 	    }
 
 	    &.byline,
 	    &.pubdate {
-	    	color: @gray-light;
+	    	display: none;
+	    	color: #fff;
 	    	font-size: 10px;
 
 	    	@media screen and (min-width: @screen-sm){
-	    		font-size: @font-size-small;
+	    		font-size: 12px;
 	    	}
 	    }
 
 	    &.byline {
-	    	text-transform: uppercase;
+	    	// text-transform: uppercase;
 	    }
 	}
 
+
+	@media screen and (max-width: 480px){
+
+		.npr-logo img {
+			height: 20px;
+		}
+
+		h1,h2,h4 {
+			margin-bottom: 5px;
+		}
+	}
+
+	@media screen and (max-width: @screen-sm){
+		background-position: 10% 0%;
+	}
+
 	.scroll-down {
-		.make-xs-column(12);
-		text-align: center;
+		position: absolute;
+		bottom: @line-height-computed;
+		left: 50%;
+
+		margin-left: -32px;
 
 		.fa-circle {
 			color: @primary-control;
@@ -252,7 +307,12 @@ header {
 		padding-bottom: @line-height-computed * 2;
 
         .explainer {
-            margin-left: 15px;
+			.make-xs-column(12);
+			margin-bottom: @line-height-computed * 3;
+
+			@media screen and (min-width: @screen-sm){
+				font-size: @font-size-base * 1.5;
+			}
         }
 
 		h3 {
@@ -383,26 +443,24 @@ header {
 
 			color: @gray;
 			padding-top: @line-height-computed / 2;
-			font-size: @font-size-small;
+			font-size: @font-size-base * 0.75;
+			font-family: @font-family-serif;
+			font-style: italic;
 
 			.credit {
-				display: block;
 				color: @gray-light;
 				text-transform: uppercase;
-				font-size: 12px;
-				padding-top: @line-height-computed / 2;
+				font-size: @font-size-base * 0.625;
+				font-family: @font-family-sans-serif;
+				font-style: normal;
 			}
 
-			&:after {
-				content: ' ';
-				display: block;
-				padding-top: @line-height-computed;
-				border-bottom: 2px solid @light-gray;
-			}
-
-			@media screen and (min-width: @screen-sm){
-				font-size: @font-size-base;
-			}
+			// &:after {
+			// 	content: ' ';
+			// 	display: block;
+			// 	padding-top: @line-height-computed;
+			// 	border-bottom: 2px solid @light-gray;
+			// }
 		}
 
 		+ .annotation {
@@ -478,24 +536,25 @@ header {
 		.cited {
 			p.text {
 				font-family: @font-family-serif;
-				font-style: italic;
+				// font-style: italic;
 				color: @gray;
-				padding: 15px;
-				background: @gray-lighter;
-				margin-bottom: 0;
-				font-size: 0.001em;
+				// padding: 15px;
+				// background: @gray-lighter;
+				margin-bottom: @line-height-computed;
+				font-size: 0;
 
 				b {
 					background: @yellow-light;
 					color: @gray-darker;
 					font-weight: normal;
-					font-size: @font-size-base * 1.5;
+					font-size: @font-size-base * 1.75;
+					padding: 2px;
 
 					&:after {
 						font-family: 'FontAwesome';
 						content: "\f00e";
-						padding-left: 5px;
-						font-size: @font-size-small;
+						padding-left: 10px;
+						font-size: @font-size-large;
 						color: @gray-dark;
 						font-style: normal;
 					}
