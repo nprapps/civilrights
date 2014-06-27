@@ -477,6 +477,15 @@ header {
 					background: @yellow-light;
 					color: @gray-darker;
 					font-weight: normal;
+
+					&:after {
+						font-family: 'FontAwesome';
+						content: "\f00e";
+						padding-left: 5px;
+						font-size: @font-size-small;
+						color: @gray-dark;
+						font-style: normal;
+					}
 				}
 
 				a {
@@ -486,9 +495,12 @@ header {
 						text-decoration: none;
 
 						b {
-							text-decoration: underline;
+							background: darken(@yellow-light, 10%);
+							text-decoration: none;
 						}
 					}
+
+
 				}
 
 				@media screen and (min-width: @screen-sm){
@@ -499,7 +511,7 @@ header {
 
 			.fulltext-link {
 				display: block;
-				background: lighten(@gray-light, 30%);
+				// background: lighten(@gray-light, 30%);
 				color: @brand-primary;
 				text-transform: uppercase;
 				font-size: 13px;
@@ -514,7 +526,7 @@ header {
 	.bill {
 		display: none;
 		padding-top: 60px + @line-height-computed * 2;
-		background: #eee;
+		background: @gray-lighter;
 
 		.fulltext-wrapper {
 			.make-row();
@@ -736,6 +748,19 @@ header {
 		.annotation-link {
 			color: @text-color;
 			background-color: @yellow-light;
+
+			&:after {
+				font-family: 'FontAwesome';
+				content: "\f010";
+				padding-left: 5px;
+				font-size: @font-size-small;
+				color: @gray;
+			}
+
+			&:hover {
+				text-decoration: none;
+				background: darken(@yellow-light, 10%);
+			}
 		}
 
 	}
