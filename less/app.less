@@ -468,11 +468,13 @@ header {
 				padding: 15px;
 				background: @gray-lighter;
 				margin-bottom: 0;
+				font-size: 0.001em;
 
 				b {
 					background: @yellow-light;
 					color: @gray-darker;
 					font-weight: normal;
+					font-size: @font-size-base * 1.5;
 
 					&:after {
 						font-family: 'FontAwesome';
@@ -500,7 +502,7 @@ header {
 				}
 
 				@media screen and (min-width: @screen-sm){
-					font-size: @font-size-large;
+					// font-size: @font-size-large;
 				}
 			}
 
@@ -706,7 +708,7 @@ header {
 			font-size: @font-size-base;
 
 			@media screen and (min-width: @screen-sm){
-				font-size: @font-size-large;
+				font-size: @font-size-base * 1.3125;
 				margin-bottom: @line-height-computed;
 			}
 		}
