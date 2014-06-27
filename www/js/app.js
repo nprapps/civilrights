@@ -1,7 +1,7 @@
 var $window = $(window);
+var $document = $(document);
 var $body = null;
 var $chapterLinks = null;
-var $documentLinks = null;
 var $toggleLinks = null;
 var $bill = null;
 var $annotations = null;
@@ -42,19 +42,6 @@ var onChapterClick = function(e) {
 
 	var target = $(this).attr('href');
 	$(target).velocity("scroll", { duration: 500, offset: -60});
-}
-
-var onDocumentLinkClick = function(e) {
-	e.preventDefault();
-
-	var $this = $(this);
-	var target = $this.attr('href');
-
-	if ($this.hasClass('bill-link')){
-		showCitedText(target);
-	} else {
-		showAnnotation(target);
-	}
 }
 
 var onToggleClick = function(e){
@@ -146,7 +133,7 @@ var showAnnotation = function(target) {
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.annotations').addClass('active');
 
-	if (mode !=='annotations'){
+	if (mode !=='annotations') {
 		$body.removeClass().addClass('annotations-active show-title');
 		$annotations.velocity("fadeIn", { duration: 300 });
 	}
@@ -176,6 +163,8 @@ var showAnnotation = function(target) {
 	}
 
 	mode = 'annotations';
+
+    hasher.setHash(target);
 }
 
 var showCitedText = function(target){
@@ -209,6 +198,8 @@ var showCitedText = function(target){
 			});
 		}
 	});
+
+    hasher.setHash(target);
 }
 
 var setupChapterAffix = function() {
@@ -245,17 +236,24 @@ var onDocumentScroll = function() {
 	}
 }
 
-var setWaypoint = function(){
+var setWaypoint = function() {
 	previousPosition = $(this).attr('href');
 }
 
+var onHashChange = function(newHash, oldHash) {
+    console.log(newHash);
+	if (newHash.indexOf('bill-') == 0) {
+		showCitedText('#' + newHash);
+	} else if (newHash.indexOf('annotation-') == 0) {
+		showAnnotation('#' + newHash);
+	}
+}
 
 $(function() {
 	$body = $('body');
 	$chapterLinks = $('.chapter-nav a');
-	$documentLinks = $('.annotation-link, .bill-link');
-	$annotationLinks = $documentLinks.filter('.annotation-link');
-	$billLinks = $documentLinks.filter('.bill-link');
+	$annotationLinks = $('.annotation-link');
+	$billLinks = $('.bill-link');
 	$toggleLinks = $('.toggle');
 	$bill = $('#bill');
 	$annotations = $('#annotations');
@@ -265,12 +263,11 @@ $(function() {
 
 
 	$chapterLinks.on('click', onChapterClick);
-	$documentLinks.on('click', onDocumentLinkClick);
 	$toggleLinks.on('click', onToggleClick);
 	$scrollDownButton.on('click', onScrollDownClick);
 
-	$(window).on('resize', _.throttle(onWindowResize, 300));
-	$(document).on('scroll', _.throttle(onDocumentScroll, 300));
+	$window.on('resize', _.throttle(onWindowResize, 300));
+	$document.on('scroll', _.throttle(onDocumentScroll, 300));
 
 	$shareModal.on('shown.bs.modal', onShareModalShown);
     $shareModal.on('hidden.bs.modal', onShareModalHidden);
@@ -290,4 +287,9 @@ $(function() {
 	});
 
     $window.on('scroll', onScroll);
+
+    hasher.changed.add(onHashChange);
+    hasher.initialized.add(onHashChange);
+    hasher.prependHash = '';
+    hasher.init();
 });
