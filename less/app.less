@@ -168,11 +168,19 @@ header {
 		font-weight: bold;
 	    line-height: 1.1;
 	    font-size: @font-size-base * 1.5;
+        margin-left: -3px;
 
 		@media screen and (min-width: @screen-sm){
 			font-size: @font-size-base * 3.75;
 		}
 
+        @media screen and (max-width: @screen-md-max) {
+            margin-left: -3px;
+        }
+
+        @media screen and (max-width: @screen-sm-max) {
+            margin-left: -1px;
+        }
 	}
 
 	p {
