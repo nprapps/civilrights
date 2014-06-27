@@ -3,12 +3,12 @@
     <a class="annotation-link" href="#annotation-{{ key }}" id="bill-{{ key }}">
 
     {% set contributor = COPY.contributors[annotation.author_key] %}
-    <img class="annotation-mug" src="./assets/mugs/{{ contributor.mug }}" title="{{ contributor.name }}" alt="{{ contributor.name }}">
+    <img class="annotation-mug" src="./assets/mugs/{{ contributor.mug }}">
 
     {% if key2 %}
         {% set annotation2 = COPY.annotations[key2] %}
         {% set contributor2 = COPY.contributors[annotation2.author_key] %}
-        <img class="annotation-mug" src="./assets/mugs/{{ contributor2.mug }}" title="{{ contributor2.name }}" alt="{{ contributor2.name }}">
+        <img class="annotation-mug" src="./assets/mugs/{{ contributor2.mug }}">
     {% endif %}
 {% endmacro %}
 
@@ -707,7 +707,7 @@
                 </h5>
 
                 <p>
-                    {{ excerpt("28, 29") }}No person in the United States shall, on the ground of race, color, or national origin, be excluded from participation in, be denied the benefits of, or be subjected to discrimination under any program or activity receiving Federal financial assistance.</a>
+                    {{ excerpt("28", "29") }}No person in the United States shall, on the ground of race, color, or national origin, be excluded from participation in, be denied the benefits of, or be subjected to discrimination under any program or activity receiving Federal financial assistance.</a>
                 </p>
 
                 <h5>
@@ -840,8 +840,8 @@
 
                 <h4>
                     
-                    DISCRIMINATION BECAUSE OF RACE, COLOR, RELIGION, SEX, OR NATIONAL
-                    {{ excerpt("34") }}ORIGIN</a>
+                    {{ excerpt("34") }}DISCRIMINATION BECAUSE OF RACE, COLOR, RELIGION, SEX, OR NATIONAL
+                    ORIGIN</a>
                 </h4>
                 <h5>
                     
