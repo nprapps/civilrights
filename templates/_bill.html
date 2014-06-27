@@ -3,12 +3,12 @@
     <a class="annotation-link" href="#annotation-{{ key }}" id="bill-{{ key }}">
 
     {% set contributor = COPY.contributors[annotation.author_key] %}
-    <img class="annotation-mug" src="./assets/mugs/{{ contributor.mug }}" title="{{ contributor.name }}" alt="{{ contributor.name }}">
+    <img class="annotation-mug" src="./assets/mugs/{{ contributor.mug }}">
 
     {% if key2 %}
         {% set annotation2 = COPY.annotations[key2] %}
         {% set contributor2 = COPY.contributors[annotation2.author_key] %}
-        <img class="annotation-mug" src="./assets/mugs/{{ contributor2.mug }}" title="{{ contributor2.name }}" alt="{{ contributor2.name }}">
+        <img class="annotation-mug" src="./assets/mugs/{{ contributor2.mug }}">
     {% endif %}
 {% endmacro %}
 
