@@ -52,6 +52,7 @@
             <div class="row">
                 <div class="contributor-wrapper">
                     <div class="row">
+                        <p class"explainer">{{ COPY.content.explainer }}</p>
                         <h3>{{ COPY.content.contributor_header }}</h3>
                     {% for contributor in COPY.contributors %}
                         <div class="contributor">
@@ -122,7 +123,7 @@
                         <div class="row">
                             <h3>{{ COPY.content.footer_contributor_header }}</h3>
                         {% for contributor in COPY.contributors %}
-                            <div class="contributor">
+                            <div class="contributor long">
                                 <img src="./assets/mugs/{{ contributor.mug }}">
                                 <h4>{{ contributor.name }}</h4>
                                 <p>{{ contributor.bio_long }}</p>

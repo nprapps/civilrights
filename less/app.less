@@ -13,11 +13,6 @@ h1,h2,h3,h4,h5,h6 {
 	margin-top: 0;
 }
 
-body {
-	padding-bottom: 60px;
-}
-
-
 .npr-logo img {
 	height: 25px;
 }
@@ -173,11 +168,19 @@ header {
 		font-weight: bold;
 	    line-height: 1.1;
 	    font-size: @font-size-base * 1.5;
+        margin-left: -3px;
 
 		@media screen and (min-width: @screen-sm){
 			font-size: @font-size-base * 3.75;
 		}
 
+        @media screen and (max-width: @screen-md-max) {
+            margin-left: -3px;
+        }
+
+        @media screen and (max-width: @screen-sm-max) {
+            margin-left: -1px;
+        }
 	}
 
 	p {
@@ -248,6 +251,10 @@ header {
 		padding-top: @line-height-computed * 2;
 		padding-bottom: @line-height-computed * 2;
 
+        .explainer {
+            margin-left: 15px;
+        }
+
 		h3 {
 			.make-xs-column(12);
 
@@ -261,6 +268,14 @@ header {
 		.make-md-column(3);
 		margin-bottom: @line-height-computed;
 		overflow: hidden;
+
+      	@media screen and (min-width: @screen-sm){
+            height: 125px;
+
+            &.long {
+                height: 185px;
+            }
+		}
 
 		img {
 			.img-responsive;
@@ -551,11 +566,6 @@ header {
 			}
 		}
 
-
-		.excerpt {
-
-		}
-
 		.chapter-nav {
 			margin-top: @line-height-computed;
 
@@ -760,7 +770,10 @@ header {
 				background: darken(@yellow-light, 10%);
 			}
 		}
-
+        
+        .approval {
+            margin-top: 50px;
+        }
 	}
 }
 
