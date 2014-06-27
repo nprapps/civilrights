@@ -270,7 +270,6 @@ $(function() {
 	$shareModal = $('#share-modal');
 	$scrollDownButton = $('.scroll-down-button');
 
-
 	$chapterLinks.on('click', onChapterClick);
 	$toggleLinks.on('click', onToggleClick);
 	$scrollDownButton.on('click', onScrollDownClick);
