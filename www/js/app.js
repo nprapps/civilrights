@@ -3,6 +3,7 @@ var $document = $(document);
 var $body = null;
 var $chapterLinks = null;
 var $toggleLinks = null;
+var $documentLinks = null;
 var $bill = null;
 var $annotations = null;
 var $fullTextButton = null;
@@ -13,6 +14,7 @@ var $scrollDownButton = null;
 
 var mode = 'annotations';
 var previousPosition = false;
+var previousOffset = false;
 var firstShare = true;
 var trackedMarks = [];
 
@@ -65,6 +67,10 @@ var onToggleClick = function(e){
 		showAnnotation(previousPosition||'#annotations');
 	}
 };
+
+var onDocumentLinkClick = function(e){
+	previousOffset = $(this).offset().top - $(window).scrollTop();
+}
 
 var onScrollDownClick = function(){
 	$('header + .contributors').velocity("scroll", {
@@ -168,28 +174,27 @@ var onWindowResize = function(){
 }
 
 var showAnnotation = function(target) {
+
+
+
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.annotations').addClass('active');
 
 	if (mode !== 'annotations') {
-		$body.removeClass().addClass('annotations-active show-title');
-		$annotations.velocity("fadeIn", { duration: 300 });
+		$body.removeClass('fulltext-active').addClass('annotations-active');
+		$annotations.show();
 	}
 
-	$bill.velocity("fadeOut", {
-		duration: 300,
+	$bill.hide();
+	$(target).velocity("scroll", {
+		duration: 0,
+		offset: -(previousOffset||71),
+		easing: "linear",
 		complete: function(){
-			$(target).velocity("scroll", {
-				duration: 500,
-				offset: -71,
-				easing: "ease-in-out",
-				complete: function(){
-					$.waypoints('destroy');
-					$billLinks.waypoint({
-						handler: setWaypoint,
-						offset: 150
-					});
-				}
+			$.waypoints('destroy');
+			$billLinks.waypoint({
+				handler: setWaypoint,
+				offset: 150
 			});
 		}
 	});
@@ -206,6 +211,9 @@ var showAnnotation = function(target) {
 }
 
 var showCitedText = function(target){
+	console.log(previousPosition);
+	console.log(previousOffset);
+
 	mode = 'fullText';
 
 	if (target !== '#bill'){
@@ -216,23 +224,19 @@ var showCitedText = function(target){
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.bill').addClass('active');
 
-	$bill.velocity("fadeIn", { duration: 300 });
-	$annotations.velocity("fadeOut", {
-		duration: 300,
-		complete: function(){
-			onWindowResize();
+	$bill.show();
+	$annotations.hide();
+	onWindowResize();
 
-			$(target).velocity("scroll", {
-				duration: 500,
-				offset: -71,
-				easing: "ease-in-out",
-				complete: function(){
-					$.waypoints('destroy');
-					$annotationLinks.waypoint({
-						handler: setWaypoint,
-						offset: 150
-					});
-				}
+	$(target).velocity("scroll", {
+		duration: 0,
+		offset: -(previousOffset||71),
+		easing: "linear",
+		complete: function(){
+			$.waypoints('destroy');
+			$annotationLinks.waypoint({
+				handler: setWaypoint,
+				offset: 150
 			});
 		}
 	});
@@ -279,6 +283,7 @@ var onDocumentScroll = function() {
 
 var setWaypoint = function() {
 	previousPosition = $(this).attr('href');
+	previousOffset = $(this).offset().top - $(window).scrollTop() - 71;
 }
 
 
@@ -287,6 +292,7 @@ $(function() {
 	$chapterLinks = $('.chapter-nav a');
 	$annotationLinks = $('.annotation-link');
 	$billLinks = $('.bill-link');
+	$documentLinks = $('.bill-link, .annotation-link');
 	$toggleLinks = $('.toggle');
 	$bill = $('#bill');
 	$annotations = $('#annotations');
@@ -296,6 +302,7 @@ $(function() {
 
 	$chapterLinks.on('click', onChapterClick);
 	$toggleLinks.on('click', onToggleClick);
+	$documentLinks.on('click', onDocumentLinkClick);
 	$scrollDownButton.on('click', onScrollDownClick);
 
 	$window.on('resize', _.throttle(onWindowResize, 300));
