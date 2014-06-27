@@ -1,3 +1,4 @@
+var $window = $(window);
 var $body = null;
 var $chapterLinks = null;
 var $documentLinks = null;
@@ -9,11 +10,11 @@ var $annotationTitles = null;
 var $billTitles = null;
 var $shareModal = null;
 var $scrollDownButton = null;
-var $w = $(window);
 
 var mode = 'annotations';
 var previousPosition = false;
 var firstShare = true;
+var trackedMarks = [];
 
 var subResponsiveImages = function() {
     /*
@@ -22,7 +23,7 @@ var subResponsiveImages = function() {
     */
 
     // MOBILE
-    if ($w.width() < 769 && Modernizr.touch === true) {
+    if ($window.width() < 769 && Modernizr.touch === true) {
         _.each($('header,.section-header'), function(sectionHeader) {
             var imageUrl = $(sectionHeader).attr('data-image').replace('.', '-sq-m.');
             $(sectionHeader).css('background-image', 'url(\'' + imageUrl + '\')');
@@ -76,7 +77,72 @@ var onToggleClick = function(e){
 	}
 };
 
-var showAnnotation = function(target){
+var onScrollDownClick = function(){
+	$('header + .contributors').velocity("scroll", {
+		duration: 500,
+		easing: "ease-in-out"
+	});
+}
+
+/*
+ * Share modal opened.
+ */
+var onShareModalShown = function(e) {
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'open-share-discuss']);
+    
+    if (firstShare) {
+        loadComments();
+
+        firstShare = false;
+    }
+}
+
+/*
+ * Share modal closed.
+ */
+var onShareModalHidden = function(e) {
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'close-share-discuss']);
+}
+
+/*
+ * Text copied to clipboard.
+ */
+var onClippyCopy = function(e) {
+    alert('Copied to your clipboard!');
+
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'summary-copied']);
+}
+
+/*
+ * Track scroll depth for completion events.
+ *
+ * After: https://github.com/robflaherty/jquery-scrolldepth
+ */
+var onScroll = _.throttle(function(e) {
+    if (mode != 'annotations') {
+        return;
+    }
+    
+    var docHeight = $(document).height();
+    var winHeight = window.innerHeight ? window.innerHeight : $window.height();
+    var scrollDistance = $window.scrollTop() + winHeight;
+
+    var marks = {
+        '25%' : parseInt(docHeight * 0.25),
+        '50%' : parseInt(docHeight * 0.50),
+        '75%' : parseInt(docHeight * 0.75),
+        '100%': docHeight - 5
+    }; 
+    
+    $.each(marks, function(mark, px) {
+        if (trackedMarks.indexOf(mark) == -1 && scrollDistance >= px) {
+            _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'completion', mark]);
+            trackedMarks.push(mark);
+        }
+    });  
+}, 500);
+
+var showAnnotation = function(target) {
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.annotations').addClass('active');
 
@@ -183,41 +249,6 @@ var setWaypoint = function(){
 	previousPosition = $(this).attr('href');
 }
 
-var onScrollDownClick = function(){
-	$('header + .contributors').velocity("scroll", {
-		duration: 500,
-		easing: "ease-in-out"
-	});
-}
-
-/*
- * Share modal opened.
- */
-var onShareModalShown = function(e) {
-    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'open-share-discuss']);
-    
-    if (firstShare) {
-        loadComments();
-
-        firstShare = false;
-    }
-}
-
-/*
- * Share modal closed.
- */
-var onShareModalHidden = function(e) {
-    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'close-share-discuss']);
-}
-
-/*
- * Text copied to clipboard.
- */
-var onClippyCopy = function(e) {
-    alert('Copied to your clipboard!');
-
-    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'summary-copied']);
-}
 
 $(function() {
 	$body = $('body');
@@ -257,4 +288,6 @@ $(function() {
 		handler: setWaypoint,
 		offset: 150
 	});
+
+    $window.on('scroll', onScroll);
 });
