@@ -23,7 +23,7 @@ var subResponsiveImages = function() {
     */
 
     // MOBILE
-    if ($window.width() < 769 && Modernizr.touch === true) {
+    if ($window.width() < 768 && Modernizr.touch === true) {
         _.each($('header,.section-header'), function(sectionHeader) {
             var imageUrl = $(sectionHeader).attr('data-image').replace('.', '-sq-m.');
             $(sectionHeader).css('background-image', 'url(\'' + imageUrl + '\')');
