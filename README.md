@@ -359,10 +359,11 @@ The Google Analytics events tracked in this application are:
 |--------|------|-----|-----|--------|--------|
 |civilrights|tweet|`location`||||
 |civilrights|facebook|`location`||||
-|civilrights|comments_opened|||||
-|civilrights|comments_closed||``seconds_open``|||
-|civilrights|comments_open_for|``seconds_open``|||
+|civilrights|email|`location`||||
+|civilrights|new-comment||||
+|civilrights|open-share-discuss||||
+|civilrights|close-share-discuss||||
+|civilrights|summary-copied||||
+|civilrights|featured-tweet-action|`action`||``tweet_url``|
+|civilrights|featured-facebook-action|`action`||``post_url``|
 
-**Notes:**
-
-* The *comments_read* action is fired once the comments pane has been open for at least ten seconds.

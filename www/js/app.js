@@ -216,7 +216,7 @@ var onShareModalHidden = function(e) {
 var onClippyCopy = function(e) {
     alert('Copied to your clipboard!');
 
-    _gaq.push(['_trackEvent', '{{ PROJECT_SLUG }}', 'summary-copied']);
+    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'summary-copied']);
 }
 
 $(function() {
