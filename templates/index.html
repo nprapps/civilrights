@@ -33,8 +33,6 @@
                         <h4><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo-black.svg"></a></h4>
                         <h1>{{ COPY.content.project_name }}</h1>
                         <h2>{{ COPY.content.project_description }}</h2>
-                        <p class="byline">{{ COPY.content.byline }}</p>
-                        <p class="pubdate">{{ COPY.content.pubdate }}</p>
                     </div>
                 </div>
             </div>
@@ -118,7 +116,7 @@
         </div>
     {% endfor %}
 
-        <div class="contributors">
+        <div class="contributors contributors-long">
             <div class="container-fluid">
                 <div class="row">
                     <div class="contributor-wrapper">
@@ -132,6 +130,13 @@
                             </div>
                         {% endfor %}
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="credits">
+                        <h3>Credits</h3>
+                        <p class="byline">{{ COPY.content.byline }}</p>
+                        <p class="pubdate">{{ COPY.content.pubdate }}</p>
                     </div>
                 </div>
             </div>
