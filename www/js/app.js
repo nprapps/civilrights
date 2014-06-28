@@ -53,6 +53,8 @@ var onToggleClick = function(e){
 
 	var $this = $(this);
 
+	previousOffset = $(previousPosition).offset().top - $(window).scrollTop() + 71;
+
 	if ($this.hasClass('active')){
 		previousPosition = false;
 		$body.velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
