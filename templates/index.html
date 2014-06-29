@@ -25,48 +25,48 @@
 
     <div class="annotations" id="annotations">
 
-    <header data-image="assets/section-images/00bus-promo.jpg">
-        <div class="project-header-wrapper">
+        <header data-image="assets/section-images/00bus-promo.jpg">
+            <div class="project-header-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="project-header">
+                            <h4><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo-black.svg"></a></h4>
+                            <h1>{{ COPY.content.project_name }}</h1>
+                            <h2>{{ COPY.content.project_description }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-down">
+                <a href="javascript:(0)" class="scroll-down-button">
+                    <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-angle-down fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+            </div>
+        </header>
+
+        <div class="contributors contributors-short">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="project-header">
-                        <h4><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo-black.svg"></a></h4>
-                        <h1>{{ COPY.content.project_name }}</h1>
-                        <h2>{{ COPY.content.project_description }}</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="scroll-down">
-            <a href="javascript:(0)" class="scroll-down-button">
-                <span class="fa-stack fa-2x">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-angle-down fa-stack-1x fa-inverse"></i>
-                </span>
-            </a>
-        </div>
-    </header>
-
-    <div class="contributors contributors-short">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="contributor-wrapper">
-                    <div class="row">
-                        <p class="explainer">{{ COPY.content.explainer }}</p>
-                        <h3>{{ COPY.content.contributor_header }}</h3>
-                    {% for contributor in COPY.contributors %}
-                        <div class="contributor">
-                            <img src="./assets/mugs/{{ contributor.mug }}">
-                            <h4>{{ contributor.name }}</h4>
-                            <p>{{ contributor.bio }}</p>
+                    <div class="contributor-wrapper">
+                        <div class="row">
+                            <p class="explainer">{{ COPY.content.explainer }}</p>
+                            <h3>{{ COPY.content.contributor_header }}</h3>
+                        {% for contributor in COPY.contributors %}
+                            <div class="contributor">
+                                <img src="./assets/mugs/{{ contributor.mug }}">
+                                <h4>{{ contributor.name }}</h4>
+                                <p>{{ contributor.bio }}</p>
+                            </div>
+                        {% endfor %}
                         </div>
-                    {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     {% for annotation in COPY.annotations %}
         {% if annotation.title != last_title %}

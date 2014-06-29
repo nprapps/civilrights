@@ -45,7 +45,10 @@ var onChapterClick = function(e) {
 	e.preventDefault();
 
 	var target = $(this).attr('href');
-	$(target).velocity("scroll", { duration: 500, offset: -60});
+
+	// $(target).velocity("scroll", { duration: 500, container: $('#bill'), offset: -60});
+
+	$bill.animate({ scrollTop: $(target).position()['top'] + 71 });
 }
 
 var onToggleClick = function(e){
@@ -53,11 +56,21 @@ var onToggleClick = function(e){
 
 	var $this = $(this);
 
-	previousOffset = $(previousPosition).offset().top - $(window).scrollTop() + 71;
+	// if (previousPosition !== false){
+	// 	previousOffset = $(previousPosition).offset().top;
+	// } else {
+	// 	previousOffset = false;
+	// }
+
 
 	if ($this.hasClass('active')){
 		previousPosition = false;
-		$body.velocity("scroll", { duration: 500, offset: -60, easing: "ease-in-out" });
+
+		if ($this.hasClass('bill')){
+			$bill.animate({ scrollTop: 0 });
+		} else {
+			$annotations.animate({ scrollTop: 0 });
+		}
 		return;
 	}
 
@@ -71,12 +84,17 @@ var onToggleClick = function(e){
 };
 
 var onDocumentLinkClick = function(e){
-	previousOffset = $(this).offset().top - $(window).scrollTop();
+	e.preventDefault();
+
+	previousOffset = $(this).offset().top;
+
+	document.location.hash = $(this).attr('href');
 }
 
 var onScrollDownClick = function(){
 	$('header + .contributors').velocity("scroll", {
 		duration: 500,
+		container: $annotations,
 		easing: "ease-in-out"
 	});
 }
@@ -176,36 +194,37 @@ var onWindowResize = function(){
 }
 
 var showAnnotation = function(target) {
-
-
-
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.annotations').addClass('active');
 
+
+	$annotations.scrollTop(0);
+
+	var offset = -(previousOffset||71);
+	var position = $(target).offset()['top'] + offset;
+
+
+	$annotations.scrollTop(position);
+
+
 	if (mode !== 'annotations') {
 		$body.removeClass('fulltext-active').addClass('annotations-active');
-		$annotations.show();
+		$annotations.velocity({
+		    translateX: "0"
+		});
 	}
 
-	$bill.hide();
-	$(target).velocity("scroll", {
-		duration: 0,
-		offset: -(previousOffset||71),
-		easing: "linear",
-		complete: function(){
-			$.waypoints('destroy');
-			$billLinks.waypoint({
-				handler: setWaypoint,
-				offset: 150
-			});
-		}
+	$bill.velocity({
+	    translateX: "100%"
 	});
+
+
 
 	if (target !== '#annotations'){
 		previousPosition = '#bill-' + target.split('-')[1];
-	} else {
-		previousPosition = false;
-	}
+	}// else {
+		// previousPosition = false;
+	// }
 
 	mode = 'annotations';
 
@@ -213,35 +232,38 @@ var showAnnotation = function(target) {
 }
 
 var showCitedText = function(target){
-	console.log(previousPosition);
-	console.log(previousOffset);
+	$('.mode .toggle').removeClass('active');
+	$('.toggle.bill').addClass('active');
 
-	mode = 'fullText';
+	$body.removeClass().addClass('fulltext-active');
+
+	$bill.scrollTop(0);
+
+	var offset = -(previousOffset||71);
+	var position = $(target).offset()['top'] + offset;
+
+	$bill.scrollTop(position);
+
+	$(target).blur();
+
+	$bill.velocity({
+	    translateX: "0"
+	});
+
+	$annotations.velocity({
+	    translateX: "-100%"
+	});
+
+
+
 
 	if (target !== '#bill'){
 		previousPosition = '#annotation-' + target.split('-')[1];
 	}
 
-	$body.removeClass().addClass('fulltext-active');
-	$('.mode .toggle').removeClass('active');
-	$('.toggle.bill').addClass('active');
+	mode = 'fullText';
 
-	$bill.show();
-	$annotations.hide();
 	onWindowResize();
-
-	$(target).velocity("scroll", {
-		duration: 0,
-		offset: -(previousOffset||71),
-		easing: "linear",
-		complete: function(){
-			$.waypoints('destroy');
-			$annotationLinks.waypoint({
-				handler: setWaypoint,
-				offset: 150
-			});
-		}
-	});
 
     hasher.setHash(target);
 }
@@ -251,10 +273,10 @@ var setupChapterAffix = function() {
 		$('.chapter-nav ul').affix({
 			offset: {
 				top: function () {
-					return (this.top = $('.chapter-nav').offset().top - 71)
+					return (this.top = $('.chapter-nav').position().top)
 				},
  				bottom: function () {
- 					return (this.bottom = $(document).height() - $('footer').offset().top + 11)
+ 					// return (this.bottom = $bill.first('.container-fluid').height())
   				}
 			}
 		})
@@ -266,7 +288,7 @@ var onWindowResize = function(){
 		'height': $(window).height(),
 		'min-height': 0
 	});
-	$('body').scrollspy({ target: '.chapter-nav', offset: 71 });
+	$bill.scrollspy({ target: '.chapter-nav', offset: 71 });
 
 	if (mode === 'fullText' ) {
 		setupChapterAffix();
@@ -274,7 +296,7 @@ var onWindowResize = function(){
 }
 
 var onDocumentScroll = function() {
-	var scrollPercentage = $(window).scrollTop() / $(window).height();
+	var scrollPercentage = $(this).scrollTop() / $(window).height();
 
 	if (mode === 'annotations' && scrollPercentage > 1){
 		$body.addClass('show-title');
@@ -284,8 +306,11 @@ var onDocumentScroll = function() {
 }
 
 var setWaypoint = function() {
+	// var context = mode == 'annotations' ? '#bill' : '#annotations';
 	previousPosition = $(this).attr('href');
-	previousOffset = $(this).offset().top - $(window).scrollTop() - 71;
+	previousOffset = 150;//$(this).offset().top;
+
+	// previousOffset = false;
 }
 
 
@@ -308,7 +333,7 @@ $(function() {
 	$scrollDownButton.on('click', onScrollDownClick);
 
 	$window.on('resize', _.throttle(onWindowResize, 300));
-	$document.on('scroll', _.throttle(onDocumentScroll, 300));
+	$('#bill, #annotations').on('scroll', _.throttle(onDocumentScroll, 300));
 
 	$shareModal.on('shown.bs.modal', onShareModalShown);
     $shareModal.on('hidden.bs.modal', onShareModalHidden);
@@ -322,7 +347,15 @@ $(function() {
 	onWindowResize();
 	subResponsiveImages();
 
-	$billLinks.waypoint({
+	$('#annotations .bill-link').waypoint({
+		context: $annotations,
+		handler: setWaypoint,
+		offset: 150
+	});
+
+
+	$('#bill .annotation-link').waypoint({
+		context: $bill,
 		handler: setWaypoint,
 		offset: 150
 	});
