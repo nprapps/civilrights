@@ -1,4 +1,4 @@
-{% macro excerpt(key, key2) %}
+{% macro excerpt(key, key2, key3) %}
     {% set annotation = COPY.annotations[key] %}
     <a class="annotation-link" href="#annotation-{{ key }}" id="bill-{{ key }}">
 
@@ -10,6 +10,13 @@
         {% set contributor2 = COPY.contributors[annotation2.author_key] %}
         <img class="annotation-mug" src="./assets/mugs/{{ contributor2.mug }}">
     {% endif %}
+
+    {% if key3 %}
+        {% set annotation3 = COPY.annotations[key3] %}
+        {% set contributor3 = COPY.contributors[annotation3.author_key] %}
+        <img class="annotation-mug" src="./assets/mugs/{{ contributor3.mug }}">
+    {% endif %}
+
 {% endmacro %}
 
 {% filter unescape|smartypants %}
@@ -86,8 +93,8 @@
                 </p>
 
                 <h2 id="fulltext-title-i">Title I</h2>
-                <h3>{{ excerpt("4") }}VOTING RIGHTS</a></h3>
-                <h5>{{ excerpt("5") }}SEC. 101.</a></h5>
+                <h3>{{ excerpt("4", "5", "50") }}VOTING RIGHTS</a></h3>
+                <h5>SEC. 101.</a></h5>
 
                 <p>
                     Section 2004 of the Revised Statutes (42 U.S.C. 1971), as amended by section 131 of the Civil Rights Act of 1957 (71 Stat. 637), and as further amended by section 601 of the Civil Rights Act of 1960 (74 Stat. 90), is further amended as follows:
