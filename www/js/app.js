@@ -14,7 +14,7 @@ var $scrollDownButton = null;
 
 var mode = 'annotations';
 var previousPosition = false;
-var previousOffset = false;
+var previousOffset = 71;
 var firstShare = true;
 var trackedMarks = [];
 
@@ -46,8 +46,6 @@ var onChapterClick = function(e) {
 
 	var target = $(this).attr('href');
 
-	// $(target).velocity("scroll", { duration: 500, container: $('#bill'), offset: -60});
-
 	$bill.animate({ scrollTop: $(target).position()['top'] + 71 });
 }
 
@@ -56,15 +54,8 @@ var onToggleClick = function(e){
 
 	var $this = $(this);
 
-	// if (previousPosition !== false){
-	// 	previousOffset = $(previousPosition).offset().top;
-	// } else {
-	// 	previousOffset = false;
-	// }
-
-
 	if ($this.hasClass('active')){
-		previousPosition = false;
+		// previousPosition = false;
 
 		if ($this.hasClass('bill')){
 			$bill.animate({ scrollTop: 0 });
@@ -74,13 +65,7 @@ var onToggleClick = function(e){
 		return;
 	}
 
-	if ($this.hasClass('bill')){
-		showCitedText(previousPosition||'#bill');
-	}
-
-	if ($this.hasClass('annotations')){
-		showAnnotation(previousPosition||'#annotations');
-	}
+	hasher.setHash(previousPosition);
 };
 
 var onDocumentLinkClick = function(e){
@@ -88,7 +73,7 @@ var onDocumentLinkClick = function(e){
 
 	previousOffset = $(this).offset().top;
 
-	document.location.hash = $(this).attr('href');
+	hasher.setHash($(this).attr('href'));
 }
 
 var onScrollDownClick = function(){
@@ -104,7 +89,7 @@ var onScrollDownClick = function(){
  */
 var onShareModalShown = function(e) {
     _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'open-share-discuss']);
-    
+
     if (firstShare) {
         loadComments();
 
@@ -137,7 +122,7 @@ var onScroll = _.throttle(function(e) {
     if (mode != 'annotations') {
         return;
     }
-    
+
     var docHeight = $(document).height();
     var winHeight = window.innerHeight ? window.innerHeight : $window.height();
     var scrollDistance = $window.scrollTop() + winHeight;
@@ -147,14 +132,14 @@ var onScroll = _.throttle(function(e) {
         '50%' : parseInt(docHeight * 0.50),
         '75%' : parseInt(docHeight * 0.75),
         '100%': docHeight - 5
-    }; 
-    
+    };
+
     $.each(marks, function(mark, px) {
         if (trackedMarks.indexOf(mark) == -1 && scrollDistance >= px) {
             _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'completion', mark]);
             trackedMarks.push(mark);
         }
-    });  
+    });
 }, 500);
 
 /*
@@ -170,7 +155,7 @@ var onDocumentScroll = function() {
 	}
 }
 
-/* 
+/*
  * Swap modes on hash changes.
  */
 var onHashChange = function(newHash, oldHash) {
@@ -197,15 +182,11 @@ var showAnnotation = function(target) {
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.annotations').addClass('active');
 
-
 	$annotations.scrollTop(0);
 
-	var offset = -(previousOffset||71);
-	var position = $(target).offset()['top'] + offset;
-
+	var position = $(target).offset()['top'] - previousOffset;
 
 	$annotations.scrollTop(position);
-
 
 	if (mode !== 'annotations') {
 		$body.removeClass('fulltext-active').addClass('annotations-active');
@@ -218,17 +199,11 @@ var showAnnotation = function(target) {
 	    translateX: "100%"
 	});
 
-
-
 	if (target !== '#annotations'){
 		previousPosition = '#bill-' + target.split('-')[1];
-	}// else {
-		// previousPosition = false;
-	// }
+	}
 
 	mode = 'annotations';
-
-    hasher.setHash(target);
 }
 
 var showCitedText = function(target){
@@ -239,8 +214,7 @@ var showCitedText = function(target){
 
 	$bill.scrollTop(0);
 
-	var offset = -(previousOffset||71);
-	var position = $(target).offset()['top'] + offset;
+	var position = $(target).offset()['top'] - previousOffset;
 
 	$bill.scrollTop(position);
 
@@ -254,9 +228,6 @@ var showCitedText = function(target){
 	    translateX: "-100%"
 	});
 
-
-
-
 	if (target !== '#bill'){
 		previousPosition = '#annotation-' + target.split('-')[1];
 	}
@@ -264,8 +235,6 @@ var showCitedText = function(target){
 	mode = 'fullText';
 
 	onWindowResize();
-
-    hasher.setHash(target);
 }
 
 var setupChapterAffix = function() {
@@ -306,13 +275,9 @@ var onDocumentScroll = function() {
 }
 
 var setWaypoint = function() {
-	// var context = mode == 'annotations' ? '#bill' : '#annotations';
 	previousPosition = $(this).attr('href');
-	previousOffset = 150;//$(this).offset().top;
-
-	// previousOffset = false;
+	previousOffset = $(this).offset()['top'];
 }
-
 
 $(function() {
 	$body = $('body');
@@ -364,6 +329,6 @@ $(function() {
 
     hasher.changed.add(onHashChange);
     hasher.initialized.add(onHashChange);
-    hasher.prependHash = '';
+    hasher.prependHash = '/';
     hasher.init();
 });
