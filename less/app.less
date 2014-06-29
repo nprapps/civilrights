@@ -493,12 +493,17 @@ header {
 		left: 0;
 		overflow: scroll;
 		z-index: 1;
+		background: #fff;
 
 		-webkit-overflow-scrolling: touch;
 
 		> div {
 			position: relative;
 		}
+	}
+
+	.annotations {
+		.transform(translateX(0));
 	}
 
 	.bill {
@@ -625,11 +630,6 @@ header {
 	}
 
 	.bill {
-		// display: none;
-		//i.transform(translateX(100%));
-		//padding-top: 60px + @line-height-computed * 2;
-		background: @gray-lighter;
-
 		.fulltext-wrapper {
 			.make-row();
 			position: static !important;

@@ -188,15 +188,18 @@ var showAnnotation = function(target) {
 
 	$annotations.scrollTop(position);
 
-	if (mode !== 'annotations') {
-		$body.removeClass('fulltext-active').addClass('annotations-active');
-		$annotations.velocity({
-		    translateX: "0"
-		});
-	}
+	$body.removeClass('fulltext-active').addClass('annotations-active');
+
+	$annotations.velocity({
+	    translateX: "0"
+	}, {
+		duration: 200
+	});
 
 	$bill.velocity({
 	    translateX: "100%"
+	}, {
+		duration: 200
 	});
 
 	if (target !== '#annotations'){
@@ -222,10 +225,14 @@ var showCitedText = function(target){
 
 	$bill.velocity({
 	    translateX: "0"
+	}, {
+		duration: 200
 	});
 
 	$annotations.velocity({
 	    translateX: "-100%"
+	}, {
+		duration: 200
 	});
 
 	if (target !== '#bill'){
@@ -318,11 +325,16 @@ $(function() {
 		offset: 150
 	});
 
-
 	$('#bill .annotation-link').waypoint({
 		context: $bill,
 		handler: setWaypoint,
 		offset: 150
+	});
+
+	$bill.velocity({
+	    translateX: "100%"
+	}, {
+		duration: 0
 	});
 
     $window.on('scroll', onScroll);
