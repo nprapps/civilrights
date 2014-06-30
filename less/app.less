@@ -388,7 +388,6 @@ header {
 
 	.section-header {
 		position: relative;
-		background-color: #000;
 		background-size: cover;
 		background-position: 50% 50%;
 		padding-bottom: 56.25%; // 16:9
@@ -492,7 +491,7 @@ header {
 		left: 0;
 		overflow: scroll;
 		z-index: 1;
-		background: #fff;
+		background: transparent !important; // sigh, iOS safari black background???
 
 		-webkit-overflow-scrolling: touch;
 
@@ -632,13 +631,13 @@ header {
 		.fulltext-wrapper {
 			.make-row();
 			position: static !important;
-			padding-top: 60px + @line-height-computed * 2;
+			padding-top: 60px + @line-height-computed;
 
 			> h1 {
 				.make-sm-column(10);
 				.make-sm-column-offset(1);
-				.make-md-column(11);
-				.make-md-column-offset(0);
+				.make-md-column(8);
+				.make-md-column-offset(3);
 			}
 
 			.chapter-nav {
@@ -659,90 +658,6 @@ header {
 
 		.chapter-nav {
 			margin-top: @line-height-computed;
-
-			ul {
-				.list-unstyled;
-
-				a {
-					// font-family: @font-family-serif;
-					// font-style: italic;
-					text-transform: uppercase;
-					color: @text-color;
-					padding: 2px 5px;
-				}
-
-				.active a {
-					color: #fff;
-
-					.section-title {
-						color: #fff;
-					}
-				}
-
-				.section-title {
-					display: block;
-					font-family: @font-family-sans-serif;
-					font-style: normal;
-					color: @gray-light;
-				}
-
-				&.affix {
-					position: fixed !important;
-					top: 71px;
-   					width: 25%;
-   					max-width: 300px;
-   					padding: 0 @grid-gutter-width / 2;
-   					margin-left: -@grid-gutter-width / 2;
-
-   					&.affix-top {
-   						position: absolute;
-   					}
-
-   					&.affix-bottom {
-   						bottom: 115px;
-   					}
-				}
-
-				@media screen and (max-width: @screen-sm-max){
-					&.nav,
-					&.affix,
-					&.affix-top,
-					&.affix-bottom {
-						position: static !important;
-						width: auto;
-						max-width: 100%;
-						padding: 0;
-						margin: 0;
-
-						.active a {
-							color: @text-color;
-							background: transparent;
-
-							.section-title {
-								color: @gray-lighter;
-							}
-						}
-					}
-
-					border-bottom: 2px solid @light-gray;
-					padding-bottom: @line-height-computed / 2;
-					font-size: 12px;
-					.content-columns(2, @grid-gutter-width / 2);
-
-					li{
-						-webkit-column-break-inside:avoid;
-						-moz-column-break-inside:avoid;
-						-o-column-break-inside:avoid;
-						-ms-column-break-inside:avoid;
-						column-break-inside:avoid;
-					}
-				}
-
-   				@media screen and (min-width:@screen-md){
-   					font-size: floor(@font-size-base * 0.75);
-   				}
-
-			}
 		}
 
 		h1 {
@@ -870,6 +785,96 @@ header {
     .nowrap {
         white-space: nowrap;
     }
+}
+
+#chapter-nav-alternate {
+	margin-top: 104px;
+}
+
+#toc {
+	.list-unstyled;
+
+	a {
+		text-transform: uppercase;
+		font-weight: bold;
+		color: @text-color;
+		padding: 2px 5px;
+	}
+
+	.active a {
+		color: #fff;
+
+		.section-title {
+			color: #fff;
+		}
+	}
+
+	.section-title {
+		display: block;
+		font-family: @font-family-sans-serif;
+		font-weight: normal;
+		font-size: 11px;
+		line-height: 1.1;
+		color: @gray-light;
+	}
+
+	&.affix {
+		position: fixed !important;
+		top: 104px;
+		width: 25%;
+		max-width: 300px;
+		padding: 0 @grid-gutter-width / 2;
+		margin-left: -@grid-gutter-width / 2;
+		z-index: 200;
+	}
+
+	&.affix-top {
+		position: absolute;
+		z-index: 200;
+	}
+
+	&.affix-bottom {
+		bottom: 115px;
+	}
+
+	@media screen and (max-width: @screen-sm-max){
+		&.nav,
+		&.affix,
+		&.affix-top,
+		&.affix-bottom {
+			position: static !important;
+			width: auto;
+			max-width: 100%;
+			padding: 0;
+			margin: 0;
+
+			.active a {
+				color: @text-color;
+				background: transparent;
+
+				.section-title {
+					color: @gray-lighter;
+				}
+			}
+		}
+
+		border-bottom: 2px solid @light-gray;
+		padding-bottom: @line-height-computed / 2;
+		font-size: 12px;
+		.content-columns(2, @grid-gutter-width / 2);
+
+		li{
+			-webkit-column-break-inside:avoid;
+			-moz-column-break-inside:avoid;
+			-o-column-break-inside:avoid;
+			-ms-column-break-inside:avoid;
+			column-break-inside:avoid;
+		}
+	}
+
+	@media screen and (min-width:@screen-md){
+		font-size: floor(@font-size-base * 0.75);
+	}
 }
 
 // Footer

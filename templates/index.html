@@ -68,7 +68,7 @@
             </div>
         </div>
 
-    {% for annotation in COPY.annotations %}
+        {% for annotation in COPY.annotations %}
         {% if annotation.title != last_title %}
         {% set slug = annotation.title|lower|replace(' ','-') %}
         {% set section_image = COPY.section_images[slug] %}
@@ -114,7 +114,7 @@
                 <p class="content">{{ annotation.content|unescape|smartypants }}</p>
             </div>
         </div>
-    {% endfor %}
+        {% endfor %}
 
         <div class="contributors contributors-long">
             <div class="container-fluid">
@@ -143,10 +143,18 @@
         </div>
     </div>
 
-
-
     <div class="bill" id="bill">
         {% include '_bill.html' %}
+    </div>
+
+    <div class="chapter-nav-alternate">
+        <div class="container-fluid">
+            <div class="row">
+                <div id="chapter-nav-alternate" class="col-md-3">
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

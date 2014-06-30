@@ -2075,7 +2075,7 @@ if (typeof define == 'undefined' && typeof exports == 'undefined' && typeof jQue
 
     Affix.DEFAULTS = {
       offset: 0,
-      target: $('#bill')
+      target: window
     }
 
     Affix.prototype.getPinnedOffset = function () {
@@ -2093,7 +2093,7 @@ if (typeof define == 'undefined' && typeof exports == 'undefined' && typeof jQue
     Affix.prototype.checkPosition = function () {
       if (!this.$element.is(':visible')) return
 
-      var scrollHeight = $('#bill').height()
+      var scrollHeight = $(document).height()
       var scrollTop    = this.$target.scrollTop()
       var position     = this.$element.offset()
       var offset       = this.options.offset

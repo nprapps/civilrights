@@ -11,6 +11,10 @@ var $annotationTitles = null;
 var $billTitles = null;
 var $shareModal = null;
 var $scrollDownButton = null;
+var $chapterNav = null;
+var $originalNav = null;
+var $alternateNav = null;
+var $spy = null;
 
 var mode = 'annotations';
 var previousPosition = false;
@@ -46,7 +50,7 @@ var onChapterClick = function(e) {
 
 	var target = $(this).attr('href');
 
-	$bill.animate({ scrollTop: $(target).position()['top'] + 71 });
+	$bill.animate({ scrollTop: $(target).position()['top'] + 150 });
 }
 
 var onToggleClick = function(e){
@@ -171,7 +175,6 @@ var onHashChange = function(newHash, oldHash) {
  */
 var onWindowResize = function(){
 	$('header').css('height', $(window).height());
-	$('body').scrollspy({ target: '.chapter-nav', offset: 71 });
 
 	if (mode === 'fullText' ) {
 		setupChapterAffix();
@@ -179,6 +182,8 @@ var onWindowResize = function(){
 }
 
 var showAnnotation = function(target) {
+	mode = 'annotations';
+
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.annotations').addClass('active');
 
@@ -193,7 +198,10 @@ var showAnnotation = function(target) {
 	$annotations.velocity({
 	    translateX: "0"
 	}, {
-		duration: 200
+		duration: 200,
+		begin: function() {
+			$chapterNav.hide();
+		}
 	});
 
 	$bill.velocity({
@@ -205,11 +213,11 @@ var showAnnotation = function(target) {
 	if (target !== '#annotations'){
 		previousPosition = '#bill-' + target.split('-')[1];
 	}
-
-	mode = 'annotations';
 }
 
 var showCitedText = function(target){
+	mode = 'fullText';
+
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.bill').addClass('active');
 
@@ -232,31 +240,37 @@ var showCitedText = function(target){
 	$annotations.velocity({
 	    translateX: "-100%"
 	}, {
-		duration: 200
+		duration: 200,
+		complete: function() {
+			onWindowResize();
+		}
 	});
 
 	if (target !== '#bill'){
 		previousPosition = '#annotation-' + target.split('-')[1];
 	}
-
-	mode = 'fullText';
-
-	onWindowResize();
 }
 
-var setupChapterAffix = function() {
+var positionChapterNav = function() {
+	$chapterNav.remove();
+	var $chapterLinks = $chapterNav.find('a');
+
 	if (Modernizr.mq('only screen and (min-width: 992px)')){
-		$('.chapter-nav ul').affix({
-			offset: {
-				top: function () {
-					return (this.top = $('.chapter-nav').position().top)
-				},
- 				bottom: function () {
- 					// return (this.bottom = $bill.first('.container-fluid').height())
-  				}
-			}
-		})
+		$alternateNav.append($chapterNav);
+		$chapterNav.addClass('affix');
+	} else {
+		$originalNav.append($chapterNav);
+		$chapterNav.removeClass('affix');
 	}
+
+	$chapterNav.find('a').on('click', onChapterClick);
+	$chapterNav.velocity('fadeIn', {
+		delay: 200,
+		complete: function() {
+			$spy = $bill.scrollspy({ target: '#chapter-nav-alternate', offset: 71 });
+			$spy.scrollspy('refresh');
+		}
+	});
 }
 
 var onWindowResize = function(){
@@ -264,10 +278,9 @@ var onWindowResize = function(){
 		'height': $(window).height(),
 		'min-height': 0
 	});
-	$bill.scrollspy({ target: '.chapter-nav', offset: 71 });
 
 	if (mode === 'fullText' ) {
-		setupChapterAffix();
+		positionChapterNav();
 	}
 }
 
@@ -288,7 +301,7 @@ var setWaypoint = function() {
 
 $(function() {
 	$body = $('body');
-	$chapterLinks = $('.chapter-nav a');
+	$chapterLinks = $('#toc a');
 	$annotationLinks = $('.annotation-link');
 	$billLinks = $('.bill-link');
 	$documentLinks = $('.bill-link, .annotation-link');
@@ -298,6 +311,9 @@ $(function() {
 	$fullTextButton = $('.bill-link.toggle');
 	$shareModal = $('#share-modal');
 	$scrollDownButton = $('.scroll-down-button');
+	$chapterNav = $('#toc');
+	$originalNav = $('.chapter-nav');
+	$alternateNav = $('#chapter-nav-alternate');
 
 	$chapterLinks.on('click', onChapterClick);
 	$toggleLinks.on('click', onToggleClick);
