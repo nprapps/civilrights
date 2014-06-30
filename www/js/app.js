@@ -208,12 +208,12 @@ var showCitedText = function(target){
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.bill').addClass('active');
 	$chapterNav.css('opacity', 0);
-	positionChapterNav();
 
 	$body.removeClass().addClass('fulltext-active');
 
 	$.waypoints('disable');
 	$bill.scrollTop(0);
+	positionChapterNav();
 	var position = $(target).offset()['top'] - previousOffset;
 	$.waypoints('enable');
 
@@ -224,16 +224,16 @@ var showCitedText = function(target){
 	$bill.velocity({
 	    translateX: "0"
 	}, {
-		duration: 200
+		duration: 200,
+		complete: function() {
+			showChapterNav();
+		}
 	});
 
 	$annotations.velocity({
 	    translateX: "-100%"
 	}, {
-		duration: 200,
-		complete: function() {
-			showChapterNav();
-		}
+		duration: 200
 	});
 
 	if (target !== '#bill'){
@@ -250,7 +250,9 @@ var positionChapterNav = function() {
 			.appendTo($fixedNav)
 		    .addClass('affix');
 
-			$spy = $bill.scrollspy({ target: '#chapter-nav-fixed', offset: 150 });
+		$bill.scrollTop(0);
+		$spy = $bill.scrollspy({ target: '#chapter-nav-fixed', offset: 150 });
+		$spy.scrollspy('refresh');
 	} else {
 		$chapterNav.remove()
 			.appendTo($staticNav);
@@ -263,13 +265,8 @@ var positionChapterNav = function() {
 var showChapterNav = function() {
 	if (Modernizr.mq('only screen and (min-width: 992px)')){
 		$chapterNav.velocity('fadeIn', {
-			delay: 200,
-			complete: function() {
-				$spy.scrollspy('refresh');
-			}
+			delay: 200
 		});
-
-		$spy.scrollspy('refresh');
 	}
 }
 
