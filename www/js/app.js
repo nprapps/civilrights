@@ -6,6 +6,7 @@ var $toggleLinks = null;
 var $documentLinks = null;
 var $bill = null;
 var $annotations = null;
+var $annotationsContent = null;
 var $fullTextButton = null;
 var $annotationTitles = null;
 var $billTitles = null;
@@ -128,9 +129,9 @@ var onScroll = _.throttle(function(e) {
         return;
     }
 
-    var docHeight = $(document).height();
+    var docHeight = $annotationsContent.height();
     var winHeight = window.innerHeight ? window.innerHeight : $window.height();
-    var scrollDistance = $window.scrollTop() + winHeight;
+    var scrollDistance = $annotations.scrollTop() + winHeight;
 
     var marks = {
         '25%' : parseInt(docHeight * 0.25),
@@ -314,6 +315,7 @@ $(function() {
 	$toggleLinks = $('.toggle');
 	$bill = $('#bill');
 	$annotations = $('#annotations');
+	$annotationsContent = $('.annotations-content');
 	$fullTextButton = $('.bill-link.toggle');
 	$shareModal = $('#share-modal');
 	$scrollDownButton = $('.scroll-down-button');
@@ -359,7 +361,7 @@ $(function() {
 		duration: 0
 	});
 
-    $window.on('scroll', onScroll);
+    $annotations.on('scroll', onScroll);
 
     hasher.changed.add(onHashChange);
     hasher.initialized.add(onHashChange);

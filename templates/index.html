@@ -25,132 +25,136 @@
 
     <div class="annotations" id="annotations">
 
-        <header data-image="assets/section-images/00bus-promo.jpg">
-            <div class="project-header-wrapper">
+        <div class="annotations-content">
+
+            <header data-image="assets/section-images/00bus-promo.jpg">
+                <div class="project-header-wrapper">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="project-header">
+                                <h4><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo-black.svg"></a></h4>
+                                <h1>{{ COPY.content.project_name }}</h1>
+                                <h2>{{ COPY.content.project_description }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-down">
+                    <a href="#" class="scroll-down-button">
+                        <span class="fa-stack fa-2x">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-angle-down fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </div>
+            </header>
+
+            <div class="contributors contributors-short">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="project-header">
-                            <h4><a class="npr-logo" href="http://npr.org"><img src="assets/npr-logo-black.svg"></a></h4>
-                            <h1>{{ COPY.content.project_name }}</h1>
-                            <h2>{{ COPY.content.project_description }}</h2>
+                        <div class="contributor-wrapper">
+                            <div class="row">
+                                <div class="section-header-caption">
+                                    <p>{{ COPY.section_images['intro']['caption'] }} <span class="credit">{{ COPY.section_images['intro']['credit'] }}</span></p>
+                                </div>
+
+                                <p class="explainer">{{ COPY.content.explainer|safe|unescape|smartypants }}</p>
+
+                                <h3>{{ COPY.content.contributor_header }}</h3>
+                            </div>
+                            <div class="row">
+                            {% for contributor in COPY.contributors %}
+                                <div class="contributor">
+                                    <img src="./assets/mugs/{{ contributor.mug }}">
+                                    <h4>{{ contributor.name }}</h4>
+                                    <p>{{ contributor.bio|unescape|smartypants }}</p>
+                                </div>
+                            {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="scroll-down">
-                <a href="#" class="scroll-down-button">
-                    <span class="fa-stack fa-2x">
-                      <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa fa-angle-down fa-stack-1x fa-inverse"></i>
-                    </span>
-                </a>
-            </div>
-        </header>
-
-        <div class="contributors contributors-short">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="contributor-wrapper">
+            {% for annotation in COPY.annotations %}
+            {% if annotation.title != last_title %}
+            {% set slug = annotation.title|lower|replace(' ','-') %}
+            {% set section_image = COPY.section_images[slug] %}
+            <div id="annotation-{{ annotation.title|lower|replace(' ','-') }}" class="section-header" data-image="assets/section-images/{{ section_image.filename }}">
+                <div class="section-header-wrapper">
+                    <div class="container-fluid">
                         <div class="row">
-                            <div class="section-header-caption">
-                                <p>{{ COPY.section_images['intro']['caption'] }} <span class="credit">{{ COPY.section_images['intro']['credit'] }}</span></p>
+                            <div class="section-header-title">
+                                <h2>{{ annotation.title }}</h2>
+                                <h3>{{ annotation.subtitle }}</h3>
                             </div>
-
-                            <p class="explainer">{{ COPY.content.explainer|safe|unescape|smartypants }}</p>
-
-                            <h3>{{ COPY.content.contributor_header }}</h3>
-                        </div>
-                        <div class="row">
-                        {% for contributor in COPY.contributors %}
-                            <div class="contributor">
-                                <img src="./assets/mugs/{{ contributor.mug }}">
-                                <h4>{{ contributor.name }}</h4>
-                                <p>{{ contributor.bio|unescape|smartypants }}</p>
-                            </div>
-                        {% endfor %}
+                            {% set last_title = annotation.title %}
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        {% for annotation in COPY.annotations %}
-        {% if annotation.title != last_title %}
-        {% set slug = annotation.title|lower|replace(' ','-') %}
-        {% set section_image = COPY.section_images[slug] %}
-        <div id="annotation-{{ annotation.title|lower|replace(' ','-') }}" class="section-header" data-image="assets/section-images/{{ section_image.filename }}">
-            <div class="section-header-wrapper">
+            <div class="section-header-caption">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="section-header-title">
-                            <h2>{{ annotation.title }}</h2>
-                            <h3>{{ annotation.subtitle }}</h3>
-                        </div>
-                        {% set last_title = annotation.title %}
+                        {% filter unescape|smartypants %}
+                        <p>{{ section_image.caption }} <span class="credit">{{ section_image.credit }}</span></p>
+                        {% endfilter %}
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="section-header-caption">
-            <div class="container-fluid">
+            {% endif %}
+            {% set contributor = COPY.contributors[annotation.author_key] %}
+            <div class="annotation container-fluid">
                 <div class="row">
-                    {% filter unescape|smartypants %}
-                    <p>{{ section_image.caption }} <span class="credit">{{ section_image.credit }}</span></p>
-                    {% endfilter %}
+                    {% if annotation.is_reply != "TRUE" %}
+                    <div class="cited">
+                        <p class="text"><a id="annotation-{{ annotation.key }}" class="bill-link" href="#bill-{{ annotation.key }}">{{ annotation.cited|unescape|smartypants }}</a></p>
+                    </div>
+                </div>
+                <div class="row">
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <div class="annotator">
+                        <img class="mug" src="./assets/mugs/{{ contributor.mug }}">
+                        <p class="name">{{ contributor.name }}</p>
+                    </div>
+                    <p class="content">{{ annotation.content|unescape|smartypants }}</p>
                 </div>
             </div>
-        </div>
-        {% endif %}
-        {% set contributor = COPY.contributors[annotation.author_key] %}
-        <div class="annotation container-fluid">
-            <div class="row">
-                {% if annotation.is_reply != "TRUE" %}
-                <div class="cited">
-                    <p class="text"><a id="annotation-{{ annotation.key }}" class="bill-link" href="#bill-{{ annotation.key }}">{{ annotation.cited|unescape|smartypants }}</a></p>
-                </div>
-            </div>
-            <div class="row">
-                {% endif %}
-            </div>
-            <div class="row">
-                <div class="annotator">
-                    <img class="mug" src="./assets/mugs/{{ contributor.mug }}">
-                    <p class="name">{{ contributor.name }}</p>
-                </div>
-                <p class="content">{{ annotation.content|unescape|smartypants }}</p>
-            </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
 
-        <div class="contributors contributors-long">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="contributor-wrapper">
-                        <div class="row">
-                            <h3>{{ COPY.content.footer_contributor_header }}</h3>
-                        </div>
-                        <div class="row">
-                        {% for contributor in COPY.contributors %}
-                            <div class="contributor long">
-                                <img src="./assets/mugs/{{ contributor.mug }}">
-                                <h4>{{ contributor.name }}</h4>
-                                <p>{{ contributor.bio_long|unescape|smartypants }}</p>
+            <div class="contributors contributors-long">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="contributor-wrapper">
+                            <div class="row">
+                                <h3>{{ COPY.content.footer_contributor_header }}</h3>
                             </div>
-                        {% endfor %}
+                            <div class="row">
+                            {% for contributor in COPY.contributors %}
+                                <div class="contributor long">
+                                    <img src="./assets/mugs/{{ contributor.mug }}">
+                                    <h4>{{ contributor.name }}</h4>
+                                    <p>{{ contributor.bio_long|unescape|smartypants }}</p>
+                                </div>
+                            {% endfor %}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="credits">
-                        <h3>Credits</h3>
-                        <p class="byline">{{ COPY.content.byline }}</p>
-                        <p class="pubdate">{{ COPY.content.pubdate }}</p>
+                    <div class="row">
+                        <div class="credits">
+                            <h3>Credits</h3>
+                            <p class="byline">{{ COPY.content.byline }}</p>
+                            <p class="pubdate">{{ COPY.content.pubdate }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            {% include 'footer.html' %}
+
         </div>
-        {% include 'footer.html' %}
 
     </div>
 
