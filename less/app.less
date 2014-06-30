@@ -318,13 +318,13 @@ header {
 		margin-bottom: @line-height-computed / 2;
 		overflow: hidden;
 
-        &:nth-child(2n) {
+        &:nth-child(2n+1) {
             @media screen and (max-width: @screen-sm-max) {
                 clear: both;
             }
         }
 
-        &:nth-child(3n+2) {
+        &:nth-child(3n+1) {
       	    @media screen and (min-width: @screen-md){
                 clear: both;
             }
