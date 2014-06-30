@@ -55,6 +55,8 @@
                         <div class="row">
                             <p class="explainer">{{ COPY.content.explainer|safe|unescape|smartypants }}</p>
                             <h3>{{ COPY.content.contributor_header }}</h3>
+                        </div>
+                        <div class="row">
                         {% for contributor in COPY.contributors %}
                             <div class="contributor">
                                 <img src="./assets/mugs/{{ contributor.mug }}">
