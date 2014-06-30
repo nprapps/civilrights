@@ -400,6 +400,12 @@ header {
 			font-weight: bold;
 			text-transform: uppercase;
 		}
+
+		p {
+			font-family: @font-family-serif;
+			font-size: @font-size-small;
+			font-style: italic;
+		}
 	}
 
 	.section-header {
@@ -819,11 +825,12 @@ header {
 	}
 
 	.active a {
-		color: #fff;
+		background-color: @gray-lighter;
+		// color: #fff;
 
-		.section-title {
-			color: #fff;
-		}
+		// .section-title {
+		// 	color: #fff;
+		// }
 	}
 
 	.section-title {
@@ -895,8 +902,8 @@ header {
 }
 
 // Footer
-footer {
-	display: none;
+.bill footer,
+.annotations footer {
 	padding: 0 15px 10px 15px;
 	font-size: 10px;
 	border-top: 2px solid @heavy-gray;
@@ -956,6 +963,7 @@ footer {
 		    font-size: 12px;
 		    float: right;
 		    color: #999;
+		    font-family: @font-family-sans-serif;
 		}
 
 		ul {
