@@ -323,8 +323,19 @@ header {
 		margin-bottom: @line-height-computed / 2;
 		overflow: hidden;
 
+        &:nth-child(2n+1) {
+            @media screen and (max-width: @screen-sm-max) {
+                clear: both;
+            }
+        }
 
-		@media screen and (min-width: @screen-sm){
+        &:nth-child(3n+1) {
+      	    @media screen and (min-width: @screen-md){
+                clear: both;
+            }
+        }
+
+		@media screen and (min-width: @screen-sm) {
 			min-height: 100px;
 		}
 
@@ -334,6 +345,7 @@ header {
             &.long {
                 min-height: 185px;
             }
+
 		}
 
 		@media screen and (min-width: @screen-lg){
