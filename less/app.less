@@ -190,11 +190,15 @@ header {
 
         margin-bottom: @line-height-computed / 2;
 
-		@media screen and (min-width: @screen-sm){
+        @media screen and (min-width: 481px){
 			font-size: 5vw;
 		}
 
-		@media screen and (min-width: @screen-sm) and (min-height: @screen-sm){
+		@media screen and (min-width: @screen-sm) and (min-height: 900px){
+			font-size: 7vw;
+		}
+
+		@media screen and (min-width: @screen-sm) and (min-height: 900px){
 			font-size: 7vw;
 		}
 
@@ -217,7 +221,7 @@ header {
 		font-size: 3vw;
 		text-transform: uppercase;
 
-		@media screen and (min-width: @screen-sm){
+		@media screen and (min-width: 481px){
 			font-size: 2vw;
 		}
 
@@ -791,7 +795,7 @@ header {
 				background: darken(@yellow-light, 10%);
 			}
 		}
-        
+
         .approval {
             margin-top: 50px;
         }
