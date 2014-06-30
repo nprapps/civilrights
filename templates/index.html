@@ -96,11 +96,11 @@
         </div>
         {% endif %}
         {% set contributor = COPY.contributors[annotation.author_key] %}
-        <div class="annotation container-fluid" id="annotation-{{ annotation.key }}">
+        <div class="annotation container-fluid">
             <div class="row">
                 {% if annotation.is_reply != "TRUE" %}
                 <div class="cited">
-                    <p class="text"><a class="bill-link" href="#bill-{{ annotation.key }}">{{ annotation.cited|unescape|smartypants }}</a></p>
+                    <p class="text"><a id="annotation-{{ annotation.key }}" class="bill-link" href="#bill-{{ annotation.key }}">{{ annotation.cited|unescape|smartypants }}</a></p>
                 </div>
             </div>
             <div class="row">

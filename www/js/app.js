@@ -17,7 +17,7 @@ var $fixedNav = null;
 var $spy = null;
 
 var mode = 'annotations';
-var previousPosition = false;
+var previousPosition = '#bill';
 var previousOffset = 71;
 var firstShare = true;
 var trackedMarks = [];
@@ -76,6 +76,7 @@ var onDocumentLinkClick = function(e){
 	e.preventDefault();
 
 	previousOffset = $(this).offset().top;
+	previousOffset = Math.floor(previousOffset);
 
 	hasher.setHash($(this).attr('href'));
 }
@@ -170,17 +171,6 @@ var onHashChange = function(newHash, oldHash) {
 	}
 }
 
-/*
- * Respond to window resizing.
- */
-var onWindowResize = function(){
-	$('header').css('height', $(window).height());
-
-	if (mode === 'fullText' ) {
-		setupChapterAffix();
-	}
-}
-
 var showAnnotation = function(target) {
 	mode = 'annotations';
 
@@ -189,9 +179,11 @@ var showAnnotation = function(target) {
 	$body.removeClass('fulltext-active').addClass('annotations-active');
 	resetChapterNav();
 
+	$.waypoints('disable');
 	$annotations.scrollTop(0);
 	var position = $(target).offset()['top'] - previousOffset;
 	$annotations.scrollTop(position);
+	$.waypoints('enable');
 
 	$annotations.velocity({
 	    translateX: "0"
@@ -220,9 +212,10 @@ var showCitedText = function(target){
 
 	$body.removeClass().addClass('fulltext-active');
 
+	$.waypoints('disable');
 	$bill.scrollTop(0);
-
 	var position = $(target).offset()['top'] - previousOffset;
+	$.waypoints('enable');
 
 	$bill.scrollTop(position);
 
