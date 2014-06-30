@@ -12,8 +12,8 @@ var $billTitles = null;
 var $shareModal = null;
 var $scrollDownButton = null;
 var $chapterNav = null;
-var $originalNav = null;
-var $alternateNav = null;
+var $staticNav = null;
+var $fixedNav = null;
 var $spy = null;
 
 var mode = 'annotations';
@@ -186,22 +186,17 @@ var showAnnotation = function(target) {
 
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.annotations').addClass('active');
+	$body.removeClass('fulltext-active').addClass('annotations-active');
+	resetChapterNav();
 
 	$annotations.scrollTop(0);
-
 	var position = $(target).offset()['top'] - previousOffset;
-
 	$annotations.scrollTop(position);
-
-	$body.removeClass('fulltext-active').addClass('annotations-active');
 
 	$annotations.velocity({
 	    translateX: "0"
 	}, {
-		duration: 200,
-		begin: function() {
-			$chapterNav.hide();
-		}
+		duration: 200
 	});
 
 	$bill.velocity({
@@ -220,6 +215,8 @@ var showCitedText = function(target){
 
 	$('.mode .toggle').removeClass('active');
 	$('.toggle.bill').addClass('active');
+	$chapterNav.css('opacity', 0);
+	positionChapterNav();
 
 	$body.removeClass().addClass('fulltext-active');
 
@@ -242,7 +239,7 @@ var showCitedText = function(target){
 	}, {
 		duration: 200,
 		complete: function() {
-			onWindowResize();
+			showChapterNav();
 		}
 	});
 
@@ -252,25 +249,43 @@ var showCitedText = function(target){
 }
 
 var positionChapterNav = function() {
-	$chapterNav.remove();
 	var $chapterLinks = $chapterNav.find('a');
 
 	if (Modernizr.mq('only screen and (min-width: 992px)')){
-		$alternateNav.append($chapterNav);
-		$chapterNav.addClass('affix');
+		$chapterNav.remove()
+			.css('opacity', 0)
+			.appendTo($fixedNav)
+		    .addClass('affix');
 	} else {
-		$originalNav.append($chapterNav);
-		$chapterNav.removeClass('affix');
+		$chapterNav.remove()
+			.appendTo($staticNav);
+		$chapterNav.css('opacity', 1);
 	}
 
+	$spy = $bill.scrollspy({ target: '#chapter-nav-alternate', offset: 71 });
+	$spy.scrollspy('refresh');
+
 	$chapterNav.find('a').on('click', onChapterClick);
-	$chapterNav.velocity('fadeIn', {
-		delay: 200,
-		complete: function() {
-			$spy = $bill.scrollspy({ target: '#chapter-nav-alternate', offset: 71 });
-			$spy.scrollspy('refresh');
-		}
-	});
+}
+
+var showChapterNav = function() {
+	if (Modernizr.mq('only screen and (min-width: 992px)')){
+		$chapterNav.velocity('fadeIn', {
+			delay: 200,
+			complete: function() {
+				$spy = $bill.scrollspy({ target: '#chapter-nav-alternate', offset: 71 });
+				$spy.scrollspy('refresh');
+			}
+		});
+	}
+}
+
+var resetChapterNav = function() {
+	if (Modernizr.mq('only screen and (min-width: 992px)')){
+		$chapterNav.remove()
+			.appendTo($staticNav)
+			.css('opacity', 0);
+	}
 }
 
 var onWindowResize = function(){
@@ -281,6 +296,7 @@ var onWindowResize = function(){
 
 	if (mode === 'fullText' ) {
 		positionChapterNav();
+		showChapterNav();
 	}
 }
 
@@ -312,8 +328,8 @@ $(function() {
 	$shareModal = $('#share-modal');
 	$scrollDownButton = $('.scroll-down-button');
 	$chapterNav = $('#toc');
-	$originalNav = $('.chapter-nav');
-	$alternateNav = $('#chapter-nav-alternate');
+	$staticNav = $('.chapter-nav');
+	$fixedNav = $('#chapter-nav-fixed');
 
 	$chapterLinks.on('click', onChapterClick);
 	$toggleLinks.on('click', onToggleClick);
