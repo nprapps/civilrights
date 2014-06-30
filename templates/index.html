@@ -53,7 +53,12 @@
                 <div class="row">
                     <div class="contributor-wrapper">
                         <div class="row">
+                            <div class="section-header-caption">
+                                <p>{{ COPY.section_images['intro']['caption'] }} <span class="credit">{{ COPY.section_images['intro']['credit'] }}</span></p>
+                            </div>
+
                             <p class="explainer">{{ COPY.content.explainer|safe|unescape|smartypants }}</p>
+
                             <h3>{{ COPY.content.contributor_header }}</h3>
                         </div>
                         <div class="row">
@@ -146,7 +151,7 @@
             </div>
         </div>
         {% include 'footer.html' %}
-        
+
     </div>
 
     <div class="bill" id="bill">

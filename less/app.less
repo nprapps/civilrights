@@ -292,15 +292,25 @@ header {
 // Content
 .main-content {
 
+	.contributors {
+		.section-header-caption p {
+			.make-sm-column(12);
+			.make-sm-column-offset(0);
+
+			margin-bottom: @line-height-computed * 2;
+		}
+	}
+
 	.contributors-long {
 		background: @light-gray;
+		padding-top: @line-height-computed * 2;
 	}
 
 	.contributor-wrapper {
 		.make-sm-column(10);
 		.make-sm-column-offset(1);
 
-		padding-top: @line-height-computed * 2;
+		// padding-top: @line-height-computed * 2;
 		padding-bottom: @line-height-computed * 2;
 
         .explainer {
@@ -385,7 +395,6 @@ header {
 			color: @gray;
 			padding-left: 75px;
 		}
-
 	}
 
 	.credits {
