@@ -249,14 +249,13 @@ var positionChapterNav = function() {
 			.css('opacity', 0)
 			.appendTo($fixedNav)
 		    .addClass('affix');
+
+			$spy = $bill.scrollspy({ target: '#chapter-nav-fixed', offset: 150 });
 	} else {
 		$chapterNav.remove()
 			.appendTo($staticNav);
 		$chapterNav.css('opacity', 1);
 	}
-
-	$spy = $bill.scrollspy({ target: '#chapter-nav-alternate', offset: 71 });
-	$spy.scrollspy('refresh');
 
 	$chapterNav.find('a').on('click', onChapterClick);
 }
@@ -266,10 +265,11 @@ var showChapterNav = function() {
 		$chapterNav.velocity('fadeIn', {
 			delay: 200,
 			complete: function() {
-				$spy = $bill.scrollspy({ target: '#chapter-nav-alternate', offset: 71 });
 				$spy.scrollspy('refresh');
 			}
 		});
+
+		$spy.scrollspy('refresh');
 	}
 }
 
