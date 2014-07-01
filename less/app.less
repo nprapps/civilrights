@@ -580,6 +580,7 @@ header {
 		.cited {
 			.make-sm-column-offset(3);
 			.make-sm-column(8);
+			.make-md-column(7);
 
 			margin-top: @line-height-computed;
 			margin-bottom: @line-height-computed / 2;
@@ -594,6 +595,7 @@ header {
 
 		.content {
 			.make-sm-column(8);
+			.make-md-column(7);
 		}
 
 		.cited {
@@ -826,20 +828,27 @@ header {
 #toc {
 	.list-unstyled;
 
+	> li {
+		position: static; // Fixes safari hit area bug inside css columns
+		overflow: hidden; //
+	}
+
 	a {
 		text-transform: uppercase;
 		font-weight: bold;
 		color: @text-color;
 		padding: 2px 5px;
+		display: block;
+		overflow: hidden; // Fixes safari hit area bug inside css columns
+		position: static; //
+
+		&:active {
+			background: #fff;
+		}
 	}
 
 	.active a {
 		background-color: @gray-lighter;
-		// color: #fff;
-
-		// .section-title {
-		// 	color: #fff;
-		// }
 	}
 
 	.section-title {
@@ -876,9 +885,10 @@ header {
 		&.affix-top,
 		&.affix-bottom {
 			position: static !important;
+			display: block;
 			width: auto;
 			max-width: 100%;
-			padding: 0;
+			padding: 0 0 @line-height-computed;
 			margin: 0;
 
 			.active a {
@@ -891,8 +901,8 @@ header {
 			}
 		}
 
+		overflow: hidden;
 		border-bottom: 2px solid @light-gray;
-		padding-bottom: @line-height-computed / 2;
 		font-size: 12px;
 		.content-columns(2, @grid-gutter-width / 2);
 
