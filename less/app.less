@@ -13,6 +13,11 @@ h1,h2,h3,h4,h5,h6 {
 	margin-top: 0;
 }
 
+.disable-hover,
+.disable-hover * {
+  pointer-events: none !important;
+}
+
 .npr-logo img {
 	height: 25px;
 }
@@ -633,8 +638,15 @@ header {
 						text-decoration: none;
 
 						b {
+							.no-touch & {
+								background: darken(@yellow-light, 10%);
+							}
+						}
+					}
+
+					&:active b {
+						.touch & {
 							background: darken(@yellow-light, 10%);
-							text-decoration: none;
 						}
 					}
 
@@ -807,7 +819,16 @@ header {
 
 			&:hover {
 				text-decoration: none;
-				background: darken(@yellow-light, 10%);
+
+				.no-touch & {
+					background: darken(@yellow-light, 10%);
+				}
+			}
+
+			&:active {
+				.touch & {
+					background: darken(@yellow-light, 10%);
+				}
 			}
 		}
 

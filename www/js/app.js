@@ -373,4 +373,6 @@ $(function() {
     hasher.initialized.add(onHashChange);
     hasher.prependHash = '/';
     hasher.init();
+
+    $document.on("touchstart", function() {}); // Enable :active pseudo-class in mobile safari ¯\_(ツ)_/¯
 });
