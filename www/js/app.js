@@ -334,6 +334,7 @@ $(function() {
 	$shareModal.on('shown.bs.modal', onShareModalShown);
     $shareModal.on('hidden.bs.modal', onShareModalHidden);
 
+    ZeroClipboard.config({ swfPath: 'js/lib/ZeroClipboard.swf' });
     var clippy = new ZeroClipboard($(".clippy"));
 
     clippy.on('ready', function(readyEvent) {
