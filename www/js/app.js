@@ -50,8 +50,13 @@ var onChapterClick = function(e) {
 	e.preventDefault();
 
 	var target = $(this).attr('href');
+	var offset = $(target).position()['top'] + $chapterNav.height() + parseFloat($(target).css('margin-top')) + parseFloat($(target).css('padding-top')) + 71;
 
-	$bill.animate({ scrollTop: $(target).position()['top'] + 150 });
+	if (Modernizr.mq('only screen and (min-width: 992px)')){
+		offset = $(target).position()['top'] + parseFloat($(target).css('margin-top')) + parseFloat($(target).css('padding-top')) + 60;
+	}
+
+	$bill.animate({ scrollTop: offset });
 }
 
 var onToggleClick = function(e){
