@@ -374,5 +374,5 @@ $(function() {
     hasher.prependHash = '/';
     hasher.init();
 
-    $document.on("touchstart", function() {}); // Enable :active pseudo-class in mobile safari ¯\_(ツ)_/¯
+    $document.on("touchstart", function() {}); // Enable :active pseudo-class in mobile safari
 });
