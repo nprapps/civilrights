@@ -65,12 +65,13 @@ var onToggleClick = function(e){
 	var $this = $(this);
 
 	if ($this.hasClass('active')){
-		// previousPosition = false;
 
 		if ($this.hasClass('bill')){
 			$bill.animate({ scrollTop: 0 });
+			hasher.setHash('bill');
 		} else {
 			$annotations.animate({ scrollTop: 0 });
+			hasher.setHash('annotations');
 		}
 		return;
 	}
@@ -87,7 +88,9 @@ var onDocumentLinkClick = function(e){
 	hasher.setHash($(this).attr('href'));
 }
 
-var onScrollDownClick = function(){
+var onScrollDownClick = function(e){
+	e.preventDefault();
+
 	$('header + .contributors').velocity("scroll", {
 		duration: 500,
 		container: $annotations,
@@ -373,4 +376,5 @@ $(function() {
     hasher.initialized.add(onHashChange);
     hasher.prependHash = '/';
     hasher.init();
+    hasher.setHash('annotations');
 });
