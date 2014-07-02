@@ -65,14 +65,19 @@ var onToggleClick = function(e){
 	var $this = $(this);
 
 	if ($this.hasClass('active')){
+		hasher.changed.active = false;
+		$.waypoints('disable');
 
 		if ($this.hasClass('bill')){
 			$bill.animate({ scrollTop: 0 });
-			hasher.setHash('bill');
+		    hasher.setHash('bill');
 		} else {
 			$annotations.animate({ scrollTop: 0 });
-			hasher.setHash('annotations');
+		    hasher.setHash('annotations');
 		}
+
+		$.waypoints('enable');
+		hasher.changed.active = true;
 		return;
 	}
 
@@ -82,10 +87,16 @@ var onToggleClick = function(e){
 var onDocumentLinkClick = function(e){
 	e.preventDefault();
 
+	var target = $(this).attr('href');
+
 	previousOffset = $(this).offset().top;
 	previousOffset = Math.floor(previousOffset);
 
-	hasher.setHash($(this).attr('href'));
+	hasher.setHash(target);
+
+	if (target === '#annotations'){
+		hasher.changed.dispatch('annotations');
+	}
 }
 
 var onScrollDownClick = function(e){
@@ -208,6 +219,8 @@ var showAnnotation = function(target) {
 
 	if (target !== '#annotations'){
 		previousPosition = '#bill-' + target.split('-')[1];
+	} else {
+		previousPosition = '#bill';
 	}
 }
 
@@ -247,6 +260,8 @@ var showCitedText = function(target){
 
 	if (target !== '#bill'){
 		previousPosition = '#annotation-' + target.split('-')[1];
+	} else {
+		previousPosition = '#annotations';
 	}
 }
 
