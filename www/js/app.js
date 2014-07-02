@@ -391,5 +391,8 @@ $(function() {
     hasher.initialized.add(onHashChange);
     hasher.prependHash = '/';
     hasher.init();
-    hasher.setHash('annotations');
+
+    if (hasher.getHash() === ""){
+	    hasher.setHash('annotations');
+    }
 });
