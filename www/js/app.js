@@ -116,8 +116,6 @@ var onShareModalShown = function(e) {
     _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'open-share-discuss']);
 
     if (firstShare) {
-        loadComments();
-
         firstShare = false;
     }
 }
