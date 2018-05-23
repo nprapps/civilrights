@@ -45,7 +45,12 @@ data/copy.xls
 data/copy.xlsx
 tumblr-theme.html
 www/test/test.html
-www/assets
+www/assets/*.jpg
+www/assets/*.png
+www/assets/*.svg
+www/assets/*.xslx
+www/assets/mugs/*
+www/assets/section-images/*
 data/gdoc*.csv
 www/comments/index.html
 analytics.json

@@ -80,12 +80,13 @@ DEBUG = True
 COPY EDITING
 """
 COPY_GOOGLE_DOC_KEY = '0AlXMOHKxzQVRdE12TkNIaTl6V19qVEt6RDFZZEZ3aEE'
-COPY_PATH = 'data/copy.xlsx'
+# COPY_PATH = 'data/copy.xlsx'
+COPY_PATH = 'assets/copy.xlsx'
 
 """
 SHARING
 """
-SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
+SHARE_URL = 'https://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
 
 """
 ADS
@@ -178,4 +179,3 @@ Run automated configuration
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 
 configure_targets(DEPLOYMENT_TARGET)
-

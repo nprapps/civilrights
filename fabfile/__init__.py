@@ -15,7 +15,7 @@ import utils
 
 if app_config.DEPLOY_TO_SERVERS:
     import servers
-    
+
 if app_config.DEPLOY_CRONTAB:
     import cron_jobs
 
@@ -135,7 +135,7 @@ def update():
     """
     Update all application data not in repository (copy, assets, etc).
     """
-    text.update()
+    # text.update()
     assets.sync()
     data.update()
 
@@ -154,7 +154,7 @@ def deploy(remote='origin'):
 
         servers.checkout_latest(remote)
 
-        servers.fabcast('text.update')
+        # servers.fabcast('text.update')
         servers.fabcast('assets.sync')
         servers.fabcast('data.update')
 
@@ -199,4 +199,3 @@ def shiva_the_destroyer():
 
             if app_config.DEPLOY_SERVICES:
                 servers.nuke_confs()
-
