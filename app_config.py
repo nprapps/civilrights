@@ -81,7 +81,7 @@ COPY EDITING
 """
 COPY_GOOGLE_DOC_KEY = '0AlXMOHKxzQVRdE12TkNIaTl6V19qVEt6RDFZZEZ3aEE'
 # COPY_PATH = 'data/copy.xlsx'
-COPY_PATH = 'assets/copy.xlsx'
+COPY_PATH = 'www/assets/copy.xlsx'
 
 """
 SHARING
